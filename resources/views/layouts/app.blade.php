@@ -112,6 +112,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
+        
         $('#edit_profil').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var id = button.data('id') 

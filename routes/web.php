@@ -37,11 +37,9 @@ Route::middleware('auth')->group(function(){
 
 	Route::get('/post/create','PostController@create')->name('post.create')->middleware('auth');
 	Route::post('/post/create','PostController@store')->name('post.store')->middleware('auth');
+	Route::post('/post/task/store','PostController@taskstore')->name('post.taskstore')->middleware('auth');
 
 	Route::get('/searchcontent','PostController@searchcontent')->name('post.searchcontent')->middleware('auth');
-
-	Route::get('/post/{post}/createtask','PostController@createtask')->name('post.createtask')->middleware('auth');
-	Route::post('/post/task/store','PostController@storetask')->name('post.storetask')->middleware('auth');
 
 	Route::get('/post/{post}','PostController@show')->name('post.show')->middleware('auth');
 	Route::get('/showtask2','PostController@showtask2')->name('post.showtask2')->middleware('auth');

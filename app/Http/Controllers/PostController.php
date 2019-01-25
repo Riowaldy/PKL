@@ -112,34 +112,30 @@ class PostController extends Controller
 
     	return redirect() -> route('post.index')->with('success');
     }
+    public function taskstore()
+    {
+        $this->validate(request(), [
+            'judul_task' => 'required',
+            'isi_task' => 'required|min:10',
+            'due_date' => 'required'
+        ]);
+        Task::create([
+            'post_id' => request('post_id'),
+            'user_id' => '1',
+            'judul_task' => request('judul_task'),
+            'status' => 'belum selesai',
+            'due_date' => request('due_date'),
+            'slug' => str_slug(request('judul_task')),
+            'isi_task' => request('isi_task')
+        ]);
+        return back()->with('success', 'Task Berhasil Ditambahkan');
+    }
 
     public function createtask(Post $post)
     {   
         
         $users = User::all();
         return view('post.createtask', compact('users', 'post'));
-    }
-
-    public function storetask()
-    {
-
-        $this->validate(request(), [
-            'judul_task' => 'required',
-            'isi_task' => 'required|min:10'
-        ]);
-
-        Task::create([
-            'post_id' => request('post_id'),
-            'user_id' => request('user_id'),
-            'judul_task' => request('judul_task'),
-            'status' => 'belum selesai',
-            'slug' => str_slug(request('judul_task')),
-            'isi_task' => request('isi_task'),
-            'due_date' => request('due_date')
-            
-        ]);
-
-        return redirect() -> route('post.task')->with('success', 'Task Berhasil Ditambahkan');
     }
 
     public function show(Post $post)
