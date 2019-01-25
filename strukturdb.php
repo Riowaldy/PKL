@@ -1,0 +1,4 @@
+- user (email, password)
+- category (id, nama, slug)
+- post (id, category_id, title, content)
+- comment (id, post_id, user_id, message)

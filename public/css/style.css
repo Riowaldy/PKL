@@ -1,0 +1,31 @@
+.jumbotron{
+	height: 400px;
+	background-color: white;
+	/*background-image: url(../img/hack.jpg	);*/
+	/*background-attachment: fixed;*/
+	/*background-size: cover;*/
+	/*background-position: 0 -100px;*/
+	/*overflow: hidden;*/
+}
+.jumbotron img{
+	width: 200px;
+	border: 5px solid #eaeaea;
+	box-shadow: text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+.jumbotron h3, .jumbotron p{
+	text-shadow: 1px 1px 10px white;
+	color: black;
+}
+hr{
+	width: 290px;
+	border-top: 3px solid #999;
+}
+section{
+	min-height: 600px;
+}
+.about{
+	min-height: 200px;
+}
+.contact{
+	/*min-height: 800px;*/
+}
