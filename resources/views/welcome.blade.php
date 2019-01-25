@@ -13,7 +13,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-image: url(../img/hack.jpg );
+                background-image: url(../img/black.png );
                 color: white;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -84,6 +84,8 @@
                 </div>
 
                 <div class="links">
+                    @component('components.who')
+                    @endcomponent
                     <!-- <a href="https://laravel.com/docs">Documentation</a> -->
                     <!-- <a href="https://laracasts.com">Laracasts</a> -->
                     <!-- <a href="https://laravel-news.com">News</a> -->

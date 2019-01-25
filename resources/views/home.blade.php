@@ -13,8 +13,14 @@
       <h3>DINAS KOMUNIKASI INFORMATIKA DAN PERSANDIAN</h3>
       <h3>KABUPATEN SITUBONDO</h3>
       <p>Aplikasi Laporan Managemen Proyek</p>
+      <p>Tampilan USER</p>
     </div>
     <!-- akhir jumbotron -->
+
+    <div class="container text-center">
+        @component('components.who')
+        @endcomponent
+    </div>
 
     <!-- about -->
       <section class="about" id="about">
