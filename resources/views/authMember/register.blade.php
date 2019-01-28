@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.appmember')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">Register Member</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('member.register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -26,15 +26,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Pilih Status</label>
+                            <label for="status" class="col-md-4 control-label">Pilih Status</label>
 
                             <div class="col-md-6">
-                                <select name="status" id="status" class="form-control" value="{{ old('status') }}" required autofocus>
-                                      <option>kepala</option>
-                                      <option>admin</option>
-                                      <option>member</option>
-                                      <option>skpd</option>
-                                </select>
+                                <input id="status" type="text" class="form-control" status="status" value="member" required autofocus readonly>
 
                                 @if ($errors->has('status'))
                                     <span class="help-block">

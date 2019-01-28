@@ -9,7 +9,6 @@
 	                	<div class="pull-right">
 	                			{{ csrf_field() }}
 	                			<button type="button" class="btn btn-xs btn-info" data-id="{{$post->id}}" data-toggle="modal" data-target="#create_task" >Tambah Task</button> &nbsp;
-	                		
 	                	</div>
 					</div>
 					<div class="panel-body"><p>{{ $post->content }}</p></div>

@@ -40,7 +40,8 @@ class AdminController extends Controller
     }
     public function AdminShow(Post $post)
     {
-        return view('post.AdminShow', compact('post'));
+        $tasks = Task::latest()->paginate(3);
+        return view('post.AdminShow', compact('post','tasks'));
     }
     public function AdminTask()
     {
@@ -92,7 +93,7 @@ class AdminController extends Controller
             'category_id' => request('category_id')
         ]);
 
-        return redirect() -> route('post.admin.project')->with('success');
+        return redirect() -> route('post.AdminProject')->with('success');
     }
 
     public function AdminTaskStore()

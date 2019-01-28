@@ -26,6 +26,8 @@ Route::post('postMail', 'MailController@post')->name('postmail');
 Route::group (['prefix' => 'admin'], function(){
 
 	// auth
+	Route::get('/register', 'Authadmin\RegisterController@showRegistrationForm')->name('admin.register');
+	Route::post('/register', 'Authadmin\RegisterController@register')->name('admin.register.submit');
 	Route::get('/login', 'AuthAdmin\LoginController@showLoginFormAdmin')->name('admin.login');
 	Route::post('/login', 'AuthAdmin\LoginController@loginAdmin')->name('admin.login.submit');
 	Route::get('/logout', 'AuthAdmin\LoginController@logout')->name('admin.logout');
@@ -46,9 +48,10 @@ Route::group (['prefix' => 'admin'], function(){
     Route::get('/AdminProfil','AdminController@AdminProfil')->name('post.AdminProfil')->middleware('auth:admin');
 
     // create
-    Route::get('/project/create','AdminController@AdminCreate')->name('post.AdminCreate')->middleware('auth:admin');
-	Route::post('/project/create','AdminController@AdminStore')->name('post.AdminStore')->middleware('auth:admin');
+    Route::get('/AdminCreate','AdminController@AdminCreate')->name('post.AdminCreate')->middleware('auth:admin');
+	Route::post('/AdminCreate','AdminController@AdminStore')->name('post.AdminStore')->middleware('auth:admin');
 	Route::post('/project/task/store','AdminController@AdminTaskStore')->name('post.AdminTaskStore')->middleware('auth:admin');
+	Route::post('/project/{post}/comment','PostCommentController@AdminStore')->name('post.AdminComment')->middleware('auth:admin');
 
     // update
 	Route::post('/AdminUpdatePost','AdminController@AdminUpdatePost')->name('AdminUpdatePost')->middleware('auth:admin');
@@ -68,15 +71,24 @@ Route::group (['prefix' => 'admin'], function(){
 Route::get('/memberhome', 'MemberController@indexMember')->name('member.home');
 Route::group (['prefix' => 'member'], function(){
 	// auth
+	Route::get('/register', 'Authmember\RegisterController@showRegistrationForm')->name('member.register');
+	Route::post('/register', 'Authmember\RegisterController@register')->name('member.register.submit');
 	Route::get('/login', 'AuthMember\LoginController@showLoginFormMember')->name('member.login');
 	Route::post('/login', 'AuthMember\LoginController@loginMember')->name('member.login.submit');
-
-	// view
 	
 
-	// create
+	// view
+	Route::get('/project','MemberController@MemberProject')->name('post.MemberProject')->middleware('auth:member');
+	Route::get('/project/{post}','MemberController@MemberShow')->name('post.MemberShow')->middleware('auth:member');
+	Route::get('/MemberNotification','MemberController@MemberNotification')->name('post.MemberNotification')->middleware('auth:member');
+	Route::get('/task/{task}','MemberController@MemberShowTask')->name('post.MemberShowTask')->middleware('auth:member');
+	Route::get('/MemberProfil','MemberController@MemberProfil')->name('post.MemberProfil')->middleware('auth:member');
 
+	// create
+	Route::post('/project/{post}/comment','PostCommentController@MemberStore')->name('post.MemberComment')->middleware('auth:member');
 	// update
+	Route::post('/MemberStatus','MemberController@MemberStatus')->name('MemberStatus')->middleware('auth:member');
+	Route::post('/MemberUpdate','MemberController@MemberUpdate')->name('MemberUpdate')->middleware('auth:member');
 
 	// delete
 

@@ -9,11 +9,79 @@
 	                	<div class="pull-right">
 	                			{{ csrf_field() }}
 	                			<button type="button" class="btn btn-xs btn-info" data-id="{{$post->id}}" data-toggle="modal" data-target="#create_task" >Tambah Task</button> &nbsp;
-	                		
 	                	</div>
 					</div>
-					<div class="panel-body"><p>{{ $post->content }}</p></div>
-						
+					<div class="panel-body"><p>{{ $post->content }}</p>
+					</div>
+
+				</div>
+			</div>
+
+			
+			<div class="col-md-8 col-md-offset-2">
+				@foreach ($tasks as $task)
+	        	<div class="panel panel-default">
+	                <div class="panel-heading">
+	                	<STRONG>{{ $task->judul_task }}</STRONG>  | {{ $task->post->title }}
+	                	<div class="pull-right">
+                          <button type="submit" class="btn btn-xs btn-danger" data-id="{{$task->id}}" data-toggle="modal" data-target="#hapus_task">Hapus</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                          <button type="submit" class="btn btn-xs btn-info" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#edit_task">Edit</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                          <button type="submit" class="btn btn-xs btn-warning" data-toggle="modal" data-target="">Add User</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                        <form action="{{ route('post.AdminShowTask', $task) }}">
+                          {{csrf_field()}}
+                          <button type="submit" class="btn btn-xs btn-primary">Detail</button> &nbsp;
+                        </form>
+                      </div>
+	                </div>
+	            </div>
+	            @endforeach
+	            {!! $tasks->render() !!}
+        	</div>
+
+	        
+	        
+
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-heading">Tambahkan Komentar</div>
+					
+					@foreach ($post->comments()->get() as $comment)
+						<div class="panel-body">
+							@if($comment->user === null)
+
+								@if($comment->member === null)
+
+								<h4>{{ $comment->admin->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
+
+								<p>{{ $comment->message }}</p>
+
+								@else
+
+								<h4>{{ $comment->member->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
+
+								<p>{{ $comment->message }}</p>
+
+								@endif
+							@else
+								<h4>{{ $comment->user->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
+
+								<p>{{ $comment->message }}</p>
+							@endif
+						</div>
+					@endforeach
+					<div class="panel-body">
+						<form action="{{ route('post.AdminComment', $post) }}" method="post" class="form-horizontal">
+							{{ csrf_field() }}
+							<textarea name="message" id="" cols="30" rows="5" class="form-control" placeholder="Berikan Komentar"></textarea>
+							<input type="submit" value="Komentar" class="btn btn-primary">							
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -64,6 +132,91 @@
 	</div>
 	<!-- Akhir Modal Create Task -->
 
+	<!-- Modal Delete -->
+    <div class="modal fade" id="hapus_task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        
+        <div class="modal-body">
+                
+  <!--Form Dalam Modal Delete -->
+          <form role="form" action="{{ route('AdminDeleteTask') }}" enctype="multipart/form-data" method="post">
+            {{csrf_field()}}
+            {{ method_field('DELETE') }}
+              <div class="form-group">
+                <input type="hidden" name="id" id="id" class="form-control" value="" readonly>
+              </div>
+              <div class="modal-body">
+                <p class="text-center">Are you sure wanna delete this task?</p>
+              </div>
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Akhir Modal Delete -->
+
+  <!-- Modal Update-->
+  <div class="modal fade" id="edit_task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                
+  <!--Form Dalam Modal Update-->
+        <form role="form" action="{{route('AdminUpdateTask')}}" enctype="multipart/form-data" method="post">
+        {{csrf_field()}}
+          <div class="box-body">
+              <div class="form-group">
+                <input type="hidden" name="id" id="id" class="form-control" value="" readonly>
+              </div>
+
+              <div class="form-group">
+                  <label for="input_nama">Nama Task</label>
+                  <input type="text" name="judul_task" id="judul_task" class="form-control" value="">
+              </div>
+
+              <div class="form-group">
+                  <label for="input_nama">Status</label>
+                  <input type="text" name="status" id="status" class="form-control" value="" readonly="">
+              </div>
+
+              <div class="form-group">
+                  <label for="input_nama">Isi Task</label>
+                  <input type="text" name="isi_task" id="isi_task" class="form-control" value="">
+              </div>
+
+              <div class="form-group">
+                  <label for="input_nama">Due Date</label>
+                  <input type="date" name="due_date" id="due_date" class="form-control" value="">
+              </div>
+                    
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Akhir Modal Update -->
+  
 	<!-- footer -->
     <footer>
       <div class="container text-center">
