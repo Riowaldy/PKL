@@ -17,3 +17,13 @@
 		You are Logged out as a <strong>ADMIN</strong> 
 	</p>
 @endif
+
+@if(Auth::guard('member')->check())
+	<p class="text-success">
+		You are Logged in as a <strong>MEMBER</strong> 
+	</p>
+	@else
+	<p class="tetx-danger">
+		You are Logged out as a <strong>MEMBER</strong> 
+	</p>
+@endif

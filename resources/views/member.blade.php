@@ -1,4 +1,4 @@
-@extends('layouts.appadmin')
+@extends('layouts.app')
 
 @section('content')
 <style>
@@ -13,7 +13,7 @@
       <h3>DINAS KOMUNIKASI INFORMATIKA DAN PERSANDIAN</h3>
       <h3>KABUPATEN SITUBONDO</h3>
       <p>Aplikasi Laporan Managemen Proyek</p>
-      <p>Tampilan ADMIN</p>
+      <p>Tampilan MEMBER</p>
     </div>
     <!-- akhir jumbotron -->
 

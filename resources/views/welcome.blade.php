@@ -51,8 +51,8 @@
 
             .links > a {
                 color: white;
-                padding: 10px 50px;
-                font-size: 15px;
+                padding: 10px 30px;
+                font-size: 10px;
                 border: solid white 1px;
                 font-weight: 1000;
                 letter-spacing: .1rem;
@@ -84,13 +84,12 @@
                 </div>
 
                 <div class="links">
+                    <a href="">Login as Kepala</a>
+                    <a href="{{ route('admin.login') }}">Login as Admin</a>
+                    <a href="{{ route('member.login') }}">Login as Member</a>
+                    <a href="">Login as SKPD</a>
                     @component('components.who')
                     @endcomponent
-                    <!-- <a href="https://laravel.com/docs">Documentation</a> -->
-                    <!-- <a href="https://laracasts.com">Laracasts</a> -->
-                    <!-- <a href="https://laravel-news.com">News</a> -->
-                    <!-- <a href="https://forge.laravel.com">Forge</a> -->
-                    <!-- <a href="https://github.com/laravel/laravel">GitHub</a> -->
                 </div>
             </div>
         </div>

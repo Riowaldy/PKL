@@ -18,18 +18,72 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/user/logout', 'Auth\LoginController@logoutUser')->name('user.logout');
-
-
-Route::group (['prefix' => 'admin'], function(){
-	Route::get('/login', 'AuthAdmin\LoginController@showLoginForm')->name('admin.login');
-	Route::post('/login', 'AuthAdmin\LoginController@login')->name('admin.login.submit');
-	Route::get('/', 'AdminController@index')->name('admin.home');
-	Route::get('/logout', 'AuthAdmin\LoginController@logout')->name('admin.logout');
-});
+Route::get('/home/logout', 'Auth\LoginController@logoutUser')->name('home.logout');
 
 Route::post('postMail', 'MailController@post')->name('postmail');
 
+// ADMIN ROUTE
+Route::group (['prefix' => 'admin'], function(){
+
+	// auth
+	Route::get('/login', 'AuthAdmin\LoginController@showLoginFormAdmin')->name('admin.login');
+	Route::post('/login', 'AuthAdmin\LoginController@loginAdmin')->name('admin.login.submit');
+	Route::get('/logout', 'AuthAdmin\LoginController@logout')->name('admin.logout');
+	Route::get('/password/reset', 'AuthAdmin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('/password/email', 'AuthAdmin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+    Route::get('/password/reset/{token}', 'AuthAdmin\ResetPasswordController@showResetForm')->name('admin.password.reset');
+    Route::post('/password/reset', 'AuthAdmin\ResetPasswordController@reset');
+
+    // view
+    Route::get('/', 'AdminController@index')->name('admin.home');
+    Route::get('/project','AdminController@AdminProject')->name('post.AdminProject')->middleware('auth:admin');
+    Route::get('/project/{post}','AdminController@AdminShow')->name('post.AdminShow')->middleware('auth:admin');
+    Route::get('/task','AdminController@AdminTask')->name('post.AdminTask')->middleware('auth:admin');
+    Route::get('/task/{task}','AdminController@AdminShowTask')->name('post.AdminShowTask')->middleware('auth:admin');
+    Route::get('/AdminCalendar','AdminController@AdminCalendar')->name('post.AdminCalendar')->middleware('auth:admin');
+    Route::get('/AdminNotification','AdminController@AdminNotification')->name('post.AdminNotification')->middleware('auth:admin');
+    Route::get('/AdminMember','AdminController@AdminMember')->name('post.AdminMember')->middleware('auth:admin');
+    Route::get('/AdminProfil','AdminController@AdminProfil')->name('post.AdminProfil')->middleware('auth:admin');
+
+    // create
+    Route::get('/project/create','AdminController@AdminCreate')->name('post.AdminCreate')->middleware('auth:admin');
+	Route::post('/project/create','AdminController@AdminStore')->name('post.AdminStore')->middleware('auth:admin');
+	Route::post('/project/task/store','AdminController@AdminTaskStore')->name('post.AdminTaskStore')->middleware('auth:admin');
+
+    // update
+	Route::post('/AdminUpdatePost','AdminController@AdminUpdatePost')->name('AdminUpdatePost')->middleware('auth:admin');
+	Route::post('/AdminUpdateTask','AdminController@AdminUpdateTask')->name('AdminUpdateTask')->middleware('auth:admin');
+	Route::post('/AdminUpdateUser','AdminController@AdminUpdateUser')->name('AdminUpdateUser')->middleware('auth:admin');
+	Route::post('/AdminUpdate','AdminController@AdminUpdate')->name('AdminUpdate')->middleware('auth:admin');
+
+    // delete
+    Route::delete('/AdminDeleteProject','AdminController@AdminDestroyProject')->name('AdminDeleteProject')->middleware('auth:admin');
+    Route::delete('/AdminDeleteTask','AdminController@AdminDestroyTask')->name('AdminDeleteTask')->middleware('auth:admin');
+    Route::delete('/AdminDeleteUser','AdminController@AdminDestroyUser')->name('AdminDeleteUser')->middleware('auth:admin');
+
+});
+
+
+// MEMBER ROUTE
+Route::get('/memberhome', 'MemberController@indexMember')->name('member.home');
+Route::group (['prefix' => 'member'], function(){
+	// auth
+	Route::get('/login', 'AuthMember\LoginController@showLoginFormMember')->name('member.login');
+	Route::post('/login', 'AuthMember\LoginController@loginMember')->name('member.login.submit');
+
+	// view
+	
+
+	// create
+
+	// update
+
+	// delete
+
+
+});
+
+// USER ROUTE
 Route::middleware('auth')->group(function(){
 	Route::get('/post','PostController@index')->name('post.index')->middleware('auth');
 	Route::get('/calendar','PostController@calendar')->name('post.calendar')->middleware('auth');

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appadmin')
 
 @section('content')
 	<section class="about" id="about">
@@ -19,8 +19,13 @@
 		                <div class="panel-heading">
 		                	Nama Task : {{ $task->judul_task }}
 		                	<div class="pull-right">
-	                			{{ csrf_field() }}
-	                			<input type="button" class="btn btn-xs btn-danger" data-id="{{$task->id}}" data-status="{{$task->status}}" data-toggle="modal" data-target="#edit_status" value="{{ $task->status }}"> &nbsp;
+		                        <form action="{{ route('post.AdminShowTask', $task) }}">
+		                          {{csrf_field()}}
+		                          <button type="submit" class="btn btn-xs btn-primary">Detail</button> &nbsp;
+		                        </form>
+		                    </div>
+		                	<div class="pull-right">
+		                		<input type="button" class="btn btn-xs btn-default" value="{{ $task->status }}"> &nbsp;
 		                	</div>
 		                	<div class="pull-right">
 		                		{{ $task->created_at->diffForHumans() }} &nbsp;

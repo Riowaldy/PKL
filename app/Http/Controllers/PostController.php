@@ -47,12 +47,12 @@ class PostController extends Controller
     }
 	
     public function profil(){
-        $ulog = Auth::user();
+        $ulog = Auth::admin();
         return view('post.profil', compact('ulog'));
     }
 
     public function updatepro(Request $request){
-      $updatee = \DB::table('users')->select('id')->where('id', $request->input('id'));
+      $updatee = \DB::table('admins')->select('id')->where('id', $request->input('id'));
       $updatee->update(['name' => $request->input('name')]);
       $updatee->update(['email' => $request->input('email')]);
       return back()->with('success', 'Profil Berhasil Diubah');

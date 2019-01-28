@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AuthAdmin;
+namespace App\Http\Controllers\AuthMember;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:member')->except('logout');
     }
 
     /**
@@ -34,9 +34,9 @@ class LoginController extends Controller
      *
      * @param \Illuminate\Http\Response
      */
-    public function showLoginFormAdmin()
+    public function showLoginFormMember()
     {
-        return view('authAdmin.login');
+        return view('authMember.login');
     }
 
     /**
@@ -45,7 +45,7 @@ class LoginController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http|Response|\Illuminate\Http\JsonResponse
      */
-    public function loginAdmin(Request $request)
+    public function loginMember(Request $request)
     {
         $this->validate($request, [
             'email' => 'required|email',
@@ -56,9 +56,9 @@ class LoginController extends Controller
             'password' => $request->password
         ];
         // Attempt to log the user in
-        if (Auth::guard('admin')->attempt($credential, $request->member)){
+        if (Auth::guard('member')->attempt($credential, $request->member)){
             // If login succesful, then redirect to their intended location
-            return redirect()->intended(route('admin.home'));
+            return redirect()->intended(route('member.home'));
         }
         // If Unsuccessful, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('email', 'remember'));
@@ -72,7 +72,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('member')->logout();
 
         return redirect('/');
     }

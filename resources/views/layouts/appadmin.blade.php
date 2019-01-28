@@ -50,33 +50,32 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('admin.login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
 
                         @else
-                            <li><a href="{{ route('home') }}">Home</a></li>
+                            <li><a href="{{ route('admin.home') }}">Home</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Project<span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('post.index') }}">All Project</a>
+                                        <a href="{{ route('post.AdminProject') }}">All Project</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('post.create') }}">Create Project</a>
+                                        <a href="{{ route('post.AdminCreate') }}">Create Project</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('post.task') }}">All Task</a>
+                                        <a href="{{ route('post.AdminTask') }}">All Task</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('post.calendar') }}">Calendar</a>
+                                        <a href="{{ route('post.AdminCalendar') }}">Calendar</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('post.notification') }}">Notification</a></li>
-                            <li><a href="{{ route('post.portfolio') }}">Laporan</a></li>
-                            <li><a href="{{ route('post.member') }}">Member</a></li>
+                            <li><a href="{{ route('post.AdminNotification') }}">Notification</a></li>
+                            <li><a href="{{ route('post.AdminMember') }}">User</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -84,16 +83,16 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('post.profil') }}">Edit Profile</a>
+                                        <a href="{{ route('post.AdminProfil') }}">Edit Profile</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="{{ route('admin.logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
@@ -111,6 +110,80 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
-    
+    <script>
+        
+        $('#edit_profil').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var name = button.data('name') 
+          var email = button.data('email') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #email').val(email);
+        })
+        $('#edit_status').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var status = button.data('status') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #status').val(status);
+        })
+        $('#edit_project').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var title = button.data('title') 
+          var content = button.data('content') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #title').val(title);
+          modal.find('.modal-body #content').val(content);
+        })
+        $('#edit_task').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var judul_task = button.data('judul_task') 
+          var status = button.data('status')
+          var isi_task = button.data('isi_task')
+          var due_date = button.data('due_date')  
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #judul_task').val(judul_task);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #isi_task').val(isi_task);
+          modal.find('.modal-body #due_date').val(due_date);
+        })
+        $('#edit_user').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var name = button.data('name')
+          var status = button.data('status')  
+          var email = button.data('email') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #email').val(email);
+        })
+        $('#hapus_project').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+        })
+        $('#hapus_task').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+        })
+        $('#hapus_user').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+        })
+    </script>
 </body>
 </html>
