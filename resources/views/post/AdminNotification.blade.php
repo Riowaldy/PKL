@@ -19,10 +19,7 @@
 		                <div class="panel-heading">
 		                	Nama Task : {{ $task->judul_task }}
 		                	<div class="pull-right">
-		                        <form action="{{ route('post.AdminShowTask', $task) }}">
-		                          {{csrf_field()}}
-		                          <button type="submit" class="btn btn-xs btn-primary">Detail</button> &nbsp;
-		                        </form>
+	                          	<button type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-toggle="modal" data-target="#detail_task">Detail</button> &nbsp;
 		                    </div>
 		                	<div class="pull-right">
 		                		<input type="button" class="btn btn-xs btn-default" value="{{ $task->status }}"> &nbsp;
@@ -31,17 +28,12 @@
 		                		{{ $task->created_at->diffForHumans() }} &nbsp;
 		                	</div>
 		                </div>
-		                
-		                <div class="panel-body">
-		                	<p>Nama Project : {{ $task->post->title }}</p>
-		                	<p>To : {{ $task->user->name }}</p>
-		                	<p>Keterangan Project : {{ str_limit($task->isi_task, 100, '...') }}</p>
-		                </div>
 	            	</div>
 	            @endforeach
 
-	            
+	            {!! $tasks->render() !!}
 		    </div>
+
 		</div>
 			</div>
 
@@ -50,11 +42,11 @@
     </section>
 
     <!-- Modal -->
-	<div class="modal fade" id="edit_status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="detail_task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Apakah task sudah selesai?</h4>
+					<h4 class="modal-title" id="myModalLabel">Task</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					</button>
@@ -62,23 +54,22 @@
 				<div class="modal-body">
 					      
 	<!--Form Dalam Modal -->
-					<form role="form" action="{{route('status')}}" enctype="multipart/form-data" method="post">{{csrf_field()}}
+					<form role="form" action="" enctype="multipart/form-data" method="post">{{csrf_field()}}
 						<div class="box-body">
 							<div class="form-group">
-								<input type="hidden" name="id" id="id" class="form-control" value="" readonly>
+								Id Task : {{$task->id}}
 							</div>
-
 							<div class="form-group">
-				              	<label for="">Pilih Status</label>
-				              	<select name="status" id="status" class="form-control">
-				                  		<option> sudah selesai </option>
-				                  		<option> belum selesai </option>
-				              	</select>
-				            </div>
-				            
+								Nama Task : {{$task->judul_task}}
+							</div>
+							<div class="form-group">
+								To : {{$task->user->name}}
+							</div>
+							<div class="form-group">
+								Keterangan Project : {{$task->isi_task}}
+							</div>
 							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Save</button>
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</form>

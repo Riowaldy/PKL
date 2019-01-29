@@ -84,10 +84,10 @@
                 </div>
 
                 <div class="links">
-                    <a href="">Login as Kepala</a>
+                    <a href="{{ route('kepala.login') }}">Login as Kepala</a>
                     <a href="{{ route('admin.login') }}">Login as Admin</a>
                     <a href="{{ route('member.login') }}">Login as Member</a>
-                    <a href="">Login as SKPD</a>
+                    <a href="{{ route('skpd.login') }}">Login as SKPD</a>
                     @component('components.who')
                     @endcomponent
                 </div>

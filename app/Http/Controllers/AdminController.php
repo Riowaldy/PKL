@@ -35,8 +35,9 @@ class AdminController extends Controller
     public function AdminProject()
     {
         $posts = Post::latest()->paginate(3);
+        $categories = Category::all();
 
-        return view('post.AdminProject', compact('posts'));
+        return view('post.AdminProject', compact('posts','categories'));
     }
     public function AdminShow(Post $post)
     {
@@ -58,7 +59,7 @@ class AdminController extends Controller
         return view('post.AdminCalendar', compact('posts'));
     }
     public function AdminNotification(){
-        $tasks = Task::all();
+        $tasks = Task::latest()->paginate(6);
         return view('post.AdminNotification', compact('tasks'));
     }
     public function AdminMember(){
@@ -72,12 +73,6 @@ class AdminController extends Controller
     }
 
 // Controller create
-    public function AdminCreate()
-    {
-        $categories = Category::all();
-
-        return view('post.AdminCreate', compact('categories'));
-    }
 
     public function AdminStore()
     {

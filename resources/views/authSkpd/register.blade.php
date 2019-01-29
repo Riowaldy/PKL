@@ -1,14 +1,14 @@
-@extends('layouts.appadmin')
+@extends('layouts.appskpd')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register Admin</div>
+                <div class="panel-heading">Register SKPD</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('admin.register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('skpd.register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -29,7 +29,7 @@
                             <label for="name" class="col-md-4 control-label">Pilih Status</label>
 
                             <div class="col-md-6">
-                                <input id="status" type="text" class="form-control" name="status" value="admin" required autofocus readonly>
+                                <input id="status" type="text" class="form-control" name="status" value="skpd" required autofocus readonly>
 
                                 @if ($errors->has('status'))
                                     <span class="help-block">

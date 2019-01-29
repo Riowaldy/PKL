@@ -23,6 +23,16 @@ class RedirectIfAuthenticated
                     return redirect()->route('member.home');
                 }
                 break;
+            case 'skpd':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('skpd.home');
+                }
+                break;
+            case 'kepala':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('kepala.home');
+                }
+                break;
             case 'admin':
                 if (Auth::guard($guard)->check()) {
                     return redirect()->route('admin.home');

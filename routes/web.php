@@ -48,7 +48,6 @@ Route::group (['prefix' => 'admin'], function(){
     Route::get('/AdminProfil','AdminController@AdminProfil')->name('post.AdminProfil')->middleware('auth:admin');
 
     // create
-    Route::get('/AdminCreate','AdminController@AdminCreate')->name('post.AdminCreate')->middleware('auth:admin');
 	Route::post('/AdminCreate','AdminController@AdminStore')->name('post.AdminStore')->middleware('auth:admin');
 	Route::post('/project/task/store','AdminController@AdminTaskStore')->name('post.AdminTaskStore')->middleware('auth:admin');
 	Route::post('/project/{post}/comment','PostCommentController@AdminStore')->name('post.AdminComment')->middleware('auth:admin');
@@ -91,6 +90,55 @@ Route::group (['prefix' => 'member'], function(){
 	Route::post('/MemberUpdate','MemberController@MemberUpdate')->name('MemberUpdate')->middleware('auth:member');
 
 	// delete
+
+
+});
+
+// SKPD ROUTE
+Route::group (['prefix' => 'skpd'], function(){
+	// auth
+	Route::get('/register', 'Authskpd\RegisterController@showRegistrationForm')->name('skpd.register');
+	Route::post('/register', 'Authskpd\RegisterController@register')->name('skpd.register.submit');
+	Route::get('/login', 'AuthSkpd\LoginController@showLoginForm')->name('skpd.login');
+	Route::post('/login', 'AuthSkpd\LoginController@login')->name('skpd.login.submit');
+
+	// view
+	Route::get('/', 'SkpdController@index')->name('skpd.home');
+	Route::get('/SkpdLaporan','SkpdController@SkpdLaporan')->name('post.SkpdLaporan')->middleware('auth:skpd');
+	Route::get('/SkpdProfil','SkpdController@SkpdProfil')->name('post.SkpdProfil')->middleware('auth:skpd');
+
+	// create
+	Route::post('/SkpdCreate','SkpdController@SkpdStore')->name('post.SkpdStore')->middleware('auth:skpd');
+
+	// update
+	Route::post('/SkpdUpdate','SkpdController@SkpdUpdate')->name('SkpdUpdate')->middleware('auth:skpd');
+
+	// delete
+
+
+
+});
+
+// KEPALA ROUTE
+Route::group (['prefix' => 'kepala'], function(){
+	// auth
+	Route::get('/register', 'Authkepala\RegisterController@showRegistrationForm')->name('kepala.register');
+	Route::post('/register', 'Authkepala\RegisterController@register')->name('kepala.register.submit');
+	Route::get('/login', 'AuthKepala\LoginController@showLoginForm')->name('kepala.login');
+	Route::post('/login', 'AuthKepala\LoginController@login')->name('kepala.login.submit');
+
+	// view
+	Route::get('/', 'KepalaController@index')->name('kepala.home');
+	Route::get('/KepalaProfil','KepalaController@KepalaProfil')->name('post.KepalaProfil')->middleware('auth:kepala');
+
+	// create
+
+
+	// update
+	Route::post('/KepalaUpdate','KepalaController@KepalaUpdate')->name('KepalaUpdate')->middleware('auth:kepala');
+
+	// delete
+
 
 
 });

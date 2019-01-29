@@ -21,8 +21,16 @@
           <div class="row">
             <div class="container">
 	    <div class="row">
+	    <div class="col-md-8 col-md-offset-2">
+	    	<div class="panel-heading">
+	    		<div class="pull-right">
+	    			<button type="submit" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#create_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create Project&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> &nbsp;
+	    		</div>
+	    	</div>
+	    	<div class="panel-heading">
+	    	</div>
+	    </div>
 	        <div class="col-md-8 col-md-offset-2">
-
 	            @foreach ($posts as $post)
 	            	<div class="panel panel-default">
 		                <div class="panel-heading">
@@ -130,6 +138,49 @@
 		</div>
 	</div>
 	<!-- Akhir Modal Update -->
+
+	<!-- Modal Create Project-->
+	<div class="modal fade" id="create_project" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Create Project</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					      
+	<!--Form Dalam Modal Create Project -->
+					<form role="form" action="{{route('post.AdminStore')}}" enctype="multipart/form-data" method="post">{{csrf_field()}}
+						<div class="box-body">
+							<div class="form-group">
+								<label for="">Nama Project</label>
+								<input type="text" name="title" id="title" class="form-control" placeholder="Tulis Judul Project">
+							</div>
+							<div class="form-group">
+								<label for="">Category</label>
+								<select name="category_id" id="" class="form-control">
+									@foreach ($categories as $category)
+										<option value="{{ $category->id }}"> {{ $category->name }} </option>
+									@endforeach
+								</select>
+							</div>	
+							<div class="form-group">
+								<label for="input_nama">Content</label>
+								<textarea name="content" id="content" rows="5" class="form-control" placeholder="Tulis Isi Project"></textarea>
+							</div>		
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">Save</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Akhir Modal Create Project -->
 
     <!-- footer -->
     <footer>

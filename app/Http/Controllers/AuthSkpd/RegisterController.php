@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\AuthMember;
+namespace App\Http\Controllers\AuthSkpd;
 
-use App\Member;
+use App\Skpd;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\RegisteredMember;
+use Illuminate\Auth\Events\RegisteredSkpd;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
@@ -14,11 +14,11 @@ class RegisterController extends Controller
     
     public function __construct()
     {
-        $this->middleware('guest:member');
+        $this->middleware('guest:skpd');
     }
      public function showRegistrationForm()
     {
-        return view('authMember.register');
+        return view('authSkpd.register');
     }
     /**
      * Get a validator for an incoming registration request.
@@ -42,18 +42,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Member::create([
+        return Skpd::create([
             'name' => $data['name'],
-            'status' => 'member',
+            'status' => 'skpd',
             'email' => $data['email'],
-            
             'password' => bcrypt($data['password']),
         ]);
     }
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        event(new RegisteredMember($member = $this->create($request->all())));
+        event(new RegisteredSkpd($member = $this->create($request->all())));
         // $this->guard('member')->login($member);
         // return $this->registered($request, $member)
         //                 ?: redirect(route('member.home'));
@@ -62,9 +61,9 @@ class RegisterController extends Controller
             'password' => $request->password
         ];
         //Attempt to log the user in
-        if (Auth::guard('member')->attempt($credential, $request->member)) {
+        if (Auth::guard('skpd')->attempt($credential, $request->member)) {
             // if login succesful, then redirect to their intended location
-            return redirect()->intended(route('member.home'));
+            return redirect()->intended(route('skpd.home'));
         }
     }
 }

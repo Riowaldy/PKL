@@ -24,6 +24,9 @@
                       <div class="pull-right">
                         <button type="submit" class="btn btn-xs btn-info" data-id="{{$user->id}}" data-name="{{$user->name}}" data-status="{{$user->status}}" data-email="{{$user->email}}" data-toggle="modal" data-target="#edit_user">Edit</button> &nbsp;
                       </div>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
+                      </div>
                   </div>
                   
               </div>
@@ -113,6 +116,43 @@
     </div>
   </div>
   <!-- Akhir Modal Update -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="detail_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">User</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                
+  <!--Form Dalam Modal -->
+          <form role="form" action="" enctype="multipart/form-data" method="post">{{csrf_field()}}
+            <div class="box-body">
+              <div class="form-group">
+                Id User : {{$user->id}}
+              </div>
+              <div class="form-group">
+                Nama User : {{$user->name}}
+              </div>
+              <div class="form-group">
+                Email : {{$user->email}}
+              </div>
+              <div class="form-group">
+                Status : {{$user->status}}
+              </div>
+              <div class="box-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
     <!-- footer -->
     <footer>
       <div class="container text-center">
