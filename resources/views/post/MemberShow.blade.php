@@ -29,6 +29,8 @@
 								<h4>{{ $comment->member->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
 
 								<p>{{ $comment->message }}</p>
+
+								@endif
 							@else
 								<h4>{{ $comment->user->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
 

@@ -20,6 +20,7 @@
 			
 			<div class="col-md-8 col-md-offset-2">
 				@foreach ($tasks as $task)
+				@if($task->post_id === $post->id)
 	        	<div class="panel panel-default">
 	                <div class="panel-heading">
 	                	<STRONG>{{ $task->judul_task }}</STRONG>  | {{ $task->post->title }}
@@ -33,13 +34,12 @@
                           <button type="submit" class="btn btn-xs btn-warning" data-toggle="modal" data-target="">Add User</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                        <form action="{{ route('post.AdminShowTask', $task) }}">
-                          {{csrf_field()}}
-                          <button type="submit" class="btn btn-xs btn-primary">Detail</button> &nbsp;
-                        </form>
+                        <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-user="{{$task->user->name}}" data-isi_task="{{$task->isi_task}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
                       </div>
 	                </div>
 	            </div>
+	            @else
+	            @endif
 	            @endforeach
 	            {!! $tasks->render() !!}
         	</div>
@@ -106,11 +106,11 @@
 							</div>
 							<div class="form-group">
 								<label for="input_nama">User</label>
-								<input type="text" name="user_id" id="user_id" class="form-control">
+								<input type="text" name="user_id" id="user_id" class="form-control" placeholder="Pilih User">
 							</div>
 							<div class="form-group">
 								<label for="input_nama">Judul Task</label>
-								<input type="text" name="judul_task" id="judul_task" class="form-control">
+								<input type="text" name="judul_task" id="judul_task" class="form-control" placeholder="Tulis Judul Task">
 							</div>
 							<div class="form-group">
 								<label for="input_nama">Isi Task</label>
@@ -216,6 +216,46 @@
     </div>
   </div>
   <!-- Akhir Modal Update -->
+
+  <!-- Modal -->
+	<div class="modal fade" id="detail_task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Task</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					      
+	<!--Form Dalam Modal -->
+					<form role="form" action="{{ route('DetailTask') }}" enctype="multipart/form-data" method="post">{{csrf_field()}}
+						<div class="box-body">
+							<div class="form-group">
+								<input type="hidden" name="id" id="id" class="form-control" value="" readonly>
+							</div>
+							<div class="form-group">
+                <label for="input_nama">Nama Task</label>
+								<input type="text" name="judul_task" id="judul_task" class="form-control" value="" readonly>
+							</div>
+							<div class="form-group">
+                <label for="input_nama">Dikerjakan Oleh</label>
+								<input type="text" name="user" id="user" class="form-control" value="" readonly>
+							</div>
+							<div class="form-group">
+                <label for="input_nama">Isi Task</label>
+								<input type="text" name="isi_task" id="isi_task" class="form-control" value="" readonly>
+							</div>
+							<div class="box-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
   
 	<!-- footer -->
     <footer>

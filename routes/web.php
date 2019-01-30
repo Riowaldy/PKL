@@ -46,6 +46,7 @@ Route::group (['prefix' => 'admin'], function(){
     Route::get('/AdminNotification','AdminController@AdminNotification')->name('post.AdminNotification')->middleware('auth:admin');
     Route::get('/AdminMember','AdminController@AdminMember')->name('post.AdminMember')->middleware('auth:admin');
     Route::get('/AdminProfil','AdminController@AdminProfil')->name('post.AdminProfil')->middleware('auth:admin');
+    Route::post('/AdminDetailTask','AdminController@DetailTask')->name('DetailTask')->middleware('auth:admin');
 
     // create
 	Route::post('/AdminCreate','AdminController@AdminStore')->name('post.AdminStore')->middleware('auth:admin');
@@ -79,9 +80,11 @@ Route::group (['prefix' => 'member'], function(){
 	// view
 	Route::get('/project','MemberController@MemberProject')->name('post.MemberProject')->middleware('auth:member');
 	Route::get('/project/{post}','MemberController@MemberShow')->name('post.MemberShow')->middleware('auth:member');
+	Route::get('/MemberCalendar','MemberController@MemberCalendar')->name('post.MemberCalendar')->middleware('auth:member');
 	Route::get('/MemberNotification','MemberController@MemberNotification')->name('post.MemberNotification')->middleware('auth:member');
 	Route::get('/task/{task}','MemberController@MemberShowTask')->name('post.MemberShowTask')->middleware('auth:member');
 	Route::get('/MemberProfil','MemberController@MemberProfil')->name('post.MemberProfil')->middleware('auth:member');
+	Route::post('/MembernDetailTask','MemberController@DetailTask')->name('DetailTask')->middleware('auth:member');
 
 	// create
 	Route::post('/project/{post}/comment','PostCommentController@MemberStore')->name('post.MemberComment')->middleware('auth:member');
@@ -129,7 +132,12 @@ Route::group (['prefix' => 'kepala'], function(){
 
 	// view
 	Route::get('/', 'KepalaController@index')->name('kepala.home');
+	Route::get('/project','KepalaController@KepalaProject')->name('post.KepalaProject')->middleware('auth:kepala');
+	Route::get('/project/{post}','KepalaController@KepalaShow')->name('post.KepalaShow')->middleware('auth:kepala');
+	Route::get('/task','KepalaController@KepalaTask')->name('post.KepalaTask')->middleware('auth:kepala');
+	Route::get('/KepalaMember','KepalaController@KepalaMember')->name('post.KepalaMember')->middleware('auth:kepala');
 	Route::get('/KepalaProfil','KepalaController@KepalaProfil')->name('post.KepalaProfil')->middleware('auth:kepala');
+	Route::post('/KepalaDetailTask','KepalaController@DetailTask')->name('DetailTask')->middleware('auth:kepala');
 
 	// create
 

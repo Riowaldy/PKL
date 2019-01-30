@@ -91,7 +91,7 @@
 								<button type="submit" class="btn btn-primary">Delete</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 							</div>
-						</div>
+						
 					</form>
 				</div>
 			</div>

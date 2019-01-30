@@ -64,7 +64,7 @@
                                         <a href="{{ route('post.MemberProject') }}">All Project</a>
                                     </li>
                                     <li>
-                                        <a href="">Calendar</a>
+                                        <a href="{{ route('post.MemberCalendar') }}">Calendar</a>
                                     </li>
                                 </ul>
                             </li>
@@ -104,6 +104,19 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
+        $('#detail_task').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var judul_task = button.data('judul_task') 
+          var user = button.data('user')
+          var isi_task = button.data('isi_task')  
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #judul_task').val(judul_task);
+          modal.find('.modal-body #user').val(user);
+          modal.find('.modal-body #isi_task').val(isi_task);
+        })
+
         $('#edit_status').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var id = button.data('id') 

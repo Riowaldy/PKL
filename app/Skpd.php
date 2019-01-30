@@ -2,7 +2,6 @@
 namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\AdminResetPasswordNotification;
 class Skpd extends Authenticatable
 {
     use Notifiable;

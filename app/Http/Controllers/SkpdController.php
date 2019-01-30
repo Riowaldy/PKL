@@ -52,15 +52,15 @@ class SkpdController extends Controller
             'lokasi' => 'required',
             'isi' => 'required'
         ]);
-
+        $skpd = Auth::user()->id;
         Laporan::create([
-        	'skpd_id' => '1',
+        	'skpd_id' => $skpd,
             'subjek' => request('subjek'),
             'lokasi' => request('lokasi'),
             'isi' => request('isi')
         ]);
 
-        return back()->with('success');
+        return back()->with('success', 'Pengaduan berhasil dikirim');
     }
 
 // Controller update

@@ -9,7 +9,7 @@
 		                	Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ Auth::user()->name }}
 		                	<div class="pull-right">
 	                			{{ csrf_field() }}
-	                			<button type="button" class="btn btn-xs btn-info" data-id="{{$ulog->id}}" data-name="{{$ulog->name}}" data-email="{{$ulog->email}}" data-toggle="modal" data-target="#edit_profil" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> &nbsp;
+	                			<button type="button" class="btn btn-xs btn-info" data-id="{{$ulog->id}}" data-name="{{$ulog->name}}" data-email="{{$ulog->email}}" data-toggle="modal" data-target="#edit_profiladmin" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> &nbsp;
 	                		</div>
 		                </div>
 		                <div class="panel-body">
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="edit_profil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="edit_profiladmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">

@@ -35,9 +35,40 @@ class KepalaController extends Controller
         return view('kepala');
     }
 
+    public function KepalaProject()
+    {
+        $posts = Post::latest()->paginate(3);
+        $categories = Category::all();
+
+        return view('post.KepalaProject', compact('posts','categories'));
+    }
+
+    public function KepalaShow(Post $post)
+    {
+        $tasks = Task::latest()->paginate(3);
+        return view('post.KepalaShow', compact('post','tasks'));
+    }
+
+    public function KepalaTask()
+    {
+        $tasks = Task::latest()->paginate(3);
+        return view('post.KepalaTask', compact('tasks'));
+    }
+
+    public function KepalaMember(){
+        $users = User::all();
+
+        return view('post.KepalaMember', compact('users'));
+    }
+
     public function KepalaProfil(){
         $ulog = Auth::user();
         return view('post.KepalaProfil', compact('ulog'));
+    }
+
+    public function DetailTask(Request $request){
+      $select = \DB::table('tasks')->select('id')->where('id', $request->input('id'));
+      return back()->with('success');
     }
 
 // Controller create

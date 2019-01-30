@@ -61,13 +61,16 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="">Project</a>
+                                        <a href="{{ route('post.KepalaProject') }}">Project</a>
                                     </li>
                                     <li>
-                                        <a href="">Task</a>
+                                        <a href="{{ route('post.KepalaTask') }}">Task</a>
                                     </li>
                                     <li>
-                                        <a href="">User</a>
+                                        <a href="">Laporan</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('post.KepalaMember') }}">User</a>
                                     </li>
                                 </ul>
                             </li>
@@ -106,6 +109,18 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
+        $('#detail_user').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var name = button.data('name')
+          var status = button.data('status')  
+          var email = button.data('email') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #email').val(email);
+        })
         $('#edit_profil').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var id = button.data('id') 
@@ -115,6 +130,18 @@
           modal.find('.modal-body #id').val(id);
           modal.find('.modal-body #name').val(name);
           modal.find('.modal-body #email').val(email);
+        })
+        $('#detail_task').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var judul_task = button.data('judul_task') 
+          var user = button.data('user')
+          var isi_task = button.data('isi_task')  
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #judul_task').val(judul_task);
+          modal.find('.modal-body #user').val(user);
+          modal.find('.modal-body #isi_task').val(isi_task);
         })
     </script>
 </body>

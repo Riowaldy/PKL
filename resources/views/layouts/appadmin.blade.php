@@ -64,14 +64,23 @@
                                         <a href="{{ route('post.AdminProject') }}">All Project</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('post.AdminTask') }}">All Task</a>
-                                    </li>
-                                    <li>
                                         <a href="{{ route('post.AdminCalendar') }}">Calendar</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('post.AdminNotification') }}">Notification</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Notification<span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('post.AdminNotification') }}">Task</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Laporan</a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li><a href="{{ route('post.AdminMember') }}">User</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
@@ -108,8 +117,31 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
-        
-        $('#edit_profil').on('show.bs.modal', function (event) {
+        $('#detail_user').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var name = button.data('name')
+          var status = button.data('status')  
+          var email = button.data('email') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #email').val(email);
+        })
+        $('#detail_task').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var judul_task = button.data('judul_task') 
+          var user = button.data('user')
+          var isi_task = button.data('isi_task')  
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #judul_task').val(judul_task);
+          modal.find('.modal-body #user').val(user);
+          modal.find('.modal-body #isi_task').val(isi_task);
+        })
+        $('#edit_profiladmin').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var id = button.data('id') 
           var name = button.data('name') 
