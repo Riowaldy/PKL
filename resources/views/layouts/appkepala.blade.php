@@ -67,7 +67,7 @@
                                         <a href="{{ route('post.KepalaTask') }}">Task</a>
                                     </li>
                                     <li>
-                                        <a href="">Laporan</a>
+                                        <a href="{{ route('post.KepalaLaporan') }}">Laporan</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('post.KepalaMember') }}">User</a>
@@ -109,6 +109,36 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
+        $('#detail_laporan').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var skpd = button.data('skpd') 
+          var subjek = button.data('subjek')
+          var lokasi = button.data('lokasi')
+          var isi = button.data('isi')  
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #skpd').val(skpd);
+          modal.find('.modal-body #subjek').val(subjek);
+          modal.find('.modal-body #lokasi').val(lokasi);
+          modal.find('.modal-body #isi').val(isi);
+        })
+        $('#detail_task').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var judul_task = button.data('judul_task') 
+          var status = button.data('status')
+          var isi_task = button.data('isi_task')
+          var start = button.data('start') 
+          var due_date = button.data('due_date') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #judul_task').val(judul_task);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #isi_task').val(isi_task);
+          modal.find('.modal-body #start').val(start);
+          modal.find('.modal-body #due_date').val(due_date);
+        })
         $('#detail_user').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var id = button.data('id') 
@@ -131,17 +161,59 @@
           modal.find('.modal-body #name').val(name);
           modal.find('.modal-body #email').val(email);
         })
-        $('#detail_task').on('show.bs.modal', function (event) {
+        $('#edit_admin').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
           var id = button.data('id') 
-          var judul_task = button.data('judul_task') 
-          var user = button.data('user')
-          var isi_task = button.data('isi_task')  
+          var name = button.data('name')
+          var status = button.data('status')  
+          var email = button.data('email') 
           var modal = $(this)
           modal.find('.modal-body #id').val(id);
-          modal.find('.modal-body #judul_task').val(judul_task);
-          modal.find('.modal-body #user').val(user);
-          modal.find('.modal-body #isi_task').val(isi_task);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #email').val(email);
+        })
+        $('#edit_member').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var name = button.data('name')
+          var status = button.data('status')  
+          var email = button.data('email') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #email').val(email);
+        })
+        $('#edit_skpd').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var name = button.data('name')
+          var status = button.data('status')  
+          var email = button.data('email') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+          modal.find('.modal-body #name').val(name);
+          modal.find('.modal-body #status').val(status);
+          modal.find('.modal-body #email').val(email);
+        })
+        $('#hapus_admin').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+        })
+        $('#hapus_member').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
+        })
+        $('#hapus_skpd').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var id = button.data('id') 
+          var modal = $(this)
+          modal.find('.modal-body #id').val(id);
         })
     </script>
 </body>

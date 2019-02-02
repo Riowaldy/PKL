@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->string('judul_task');
             $table->string('slug');
             $table->text('isi_task');
+            $table->date('start');
             $table->date('due_date');
             $table->timestamps();
 

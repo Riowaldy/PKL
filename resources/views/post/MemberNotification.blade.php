@@ -9,11 +9,11 @@
               <hr>
             </div> 
           </div>
+          
           <div class="row">
             <div class="container">
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">
-
 	            @foreach ($tasks as $task)
 	            	<div class="panel panel-default">
 		                <div class="panel-heading">
@@ -23,7 +23,7 @@
 	                			<input type="button" class="btn btn-xs btn-danger" data-id="{{$task->id}}" data-status="{{$task->status}}" data-toggle="modal" data-target="#edit_status" value="{{ $task->status }}"> &nbsp;
 		                	</div>
 		                	<div class="pull-right">
-	                          	<input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-user="{{$task->user->name}}" data-isi_task="{{$task->isi_task}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
+	                          	<input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
 		                    </div>
 		                	<div class="pull-right">
 		                		{{ $task->created_at->diffForHumans() }} &nbsp;
@@ -91,23 +91,34 @@
 				<div class="modal-body">
 					      
 	<!--Form Dalam Modal -->
-					<form role="form" action="{{ route('DetailTask') }}" enctype="multipart/form-data" method="post">{{csrf_field()}}
+					<form role="form" action="" enctype="multipart/form-data" method="post">{{csrf_field()}}
 						<div class="box-body">
 							<div class="form-group">
 								<input type="hidden" name="id" id="id" class="form-control" value="" readonly>
 							</div>
 							<div class="form-group">
-                <label for="input_nama">Nama Task</label>
-								<input type="text" name="judul_task" id="judul_task" class="form-control" value="" readonly>
-							</div>
-							<div class="form-group">
-                <label for="input_nama">Dikerjakan Oleh</label>
-								<input type="text" name="user" id="user" class="form-control" value="" readonly>
-							</div>
-							<div class="form-group">
-                <label for="input_nama">Isi Task</label>
-								<input type="text" name="isi_task" id="isi_task" class="form-control" value="" readonly>
-							</div>
+		                      <label for="input_nama">Nama Task</label>
+		                      <input type="text" name="judul_task" id="judul_task" class="form-control" value="" readonly>
+		                 	</div>
+		                 	<div class="form-group">
+		                      <label for="input_nama">Status</label>
+		                      <input type="text" name="status" id="status" class="form-control" value="" readonly>
+		                  	</div>
+
+		                  	<div class="form-group">
+		                      <label for="input_nama">Isi Task</label>
+		                      <input type="text" name="isi_task" id="isi_task" class="form-control" value="" readonly>
+		                  	</div>
+
+		                  	<div class="form-group">
+		                      <label for="input_nama">Start</label>
+		                      <input type="date" name="start" id="start" class="form-control" value="" readonly>
+		                  	</div>
+
+		                  	<div class="form-group">
+		                      <label for="input_nama">Due Date</label>
+		                      <input type="date" name="due_date" id="due_date" class="form-control" value="" readonly>
+		                  	</div>
 							<div class="box-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							</div>

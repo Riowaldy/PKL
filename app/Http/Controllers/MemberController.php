@@ -49,7 +49,7 @@ class MemberController extends Controller
         return view('post.MemberCalendar', compact('posts'));
     }
     public function MemberNotification(){
-        $tasks = Task::where('user_id',Auth::user()->id)->get();
+        $tasks = Task::all();
         return view('post.MemberNotification', compact('tasks'));
     }
     public function MemberShowTask(Task $task)
@@ -59,10 +59,6 @@ class MemberController extends Controller
     public function MemberProfil(){
         $ulog = Auth::user();
         return view('post.MemberProfil', compact('ulog'));
-    }
-    public function DetailTask(Request $request){
-      $select = \DB::table('tasks')->select('id')->where('id', $request->input('id'));
-      return back()->with('success');
     }
 
 // Controller create

@@ -8,8 +8,10 @@ use App\Category;
 use App\User;
 use App\Member;
 use App\Skpd;
+use App\Admin;
 use App\Kepala;
 use App\Task;
+use App\Laporan;
 use Illuminate\Support\Facades\Auth;
 
 class KepalaController extends Controller
@@ -55,10 +57,18 @@ class KepalaController extends Controller
         return view('post.KepalaTask', compact('tasks'));
     }
 
-    public function KepalaMember(){
-        $users = User::all();
+    public function KepalaLaporan()
+    {
+        $laporans = Laporan::latest()->paginate(3);
+        return view('post.KepalaLaporan', compact('laporans'));
+    }
 
-        return view('post.KepalaMember', compact('users'));
+    public function KepalaMember(){
+        $admins = Admin::all();
+        $members = Member::all();
+        $skpds = Skpd::all();
+
+        return view('post.KepalaMember', compact('skpds','members','admins'));
     }
 
     public function KepalaProfil(){
@@ -81,6 +91,48 @@ class KepalaController extends Controller
       $updatee->update(['email' => $request->input('email')]);
       return back()->with('success');
     }
+    public function KepalaUpdateAdmin(Request $request){
+      $updatee = \DB::table('admins')->select('id')->where('id', $request->input('id'));
+      $updatee->update(['name' => $request->input('name')]);
+      $updatee->update(['status' => $request->input('status')]);
+      $updatee->update(['email' => $request->input('email')]);
+      return back()->with('success');
+    }
+    public function KepalaUpdateMember(Request $request){
+      $updatee = \DB::table('members')->select('id')->where('id', $request->input('id'));
+      $updatee->update(['name' => $request->input('name')]);
+      $updatee->update(['status' => $request->input('status')]);
+      $updatee->update(['email' => $request->input('email')]);
+      return back()->with('success');
+    }
+    public function KepalaUpdateSkpd(Request $request){
+      $updatee = \DB::table('skpds')->select('id')->where('id', $request->input('id'));
+      $updatee->update(['name' => $request->input('name')]);
+      $updatee->update(['status' => $request->input('status')]);
+      $updatee->update(['email' => $request->input('email')]);
+      return back()->with('success');
+    }
 
 // Controller delete
+    public function KepalaDestroyAdmin(Request $request)
+    {
+      $delete = \DB::table('admins')->select('id')->where('id', $request->input('id'));
+
+      $delete->delete();
+      return back()->with('success');
+    }
+    public function KepalaDestroyMember(Request $request)
+    {
+      $delete = \DB::table('members')->select('id')->where('id', $request->input('id'));
+
+      $delete->delete();
+      return back()->with('success');
+    }
+    public function KepalaDestroySkpd(Request $request)
+    {
+      $delete = \DB::table('skpds')->select('id')->where('id', $request->input('id'));
+
+      $delete->delete();
+      return back()->with('success');
+    }
 }

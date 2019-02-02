@@ -41,17 +41,18 @@ Route::group (['prefix' => 'admin'], function(){
     Route::get('/project','AdminController@AdminProject')->name('post.AdminProject')->middleware('auth:admin');
     Route::get('/project/{post}','AdminController@AdminShow')->name('post.AdminShow')->middleware('auth:admin');
     Route::get('/task','AdminController@AdminTask')->name('post.AdminTask')->middleware('auth:admin');
+    Route::get('/laporan','AdminController@AdminLaporan')->name('post.AdminLaporan')->middleware('auth:admin');
     Route::get('/task/{task}','AdminController@AdminShowTask')->name('post.AdminShowTask')->middleware('auth:admin');
     Route::get('/AdminCalendar','AdminController@AdminCalendar')->name('post.AdminCalendar')->middleware('auth:admin');
     Route::get('/AdminNotification','AdminController@AdminNotification')->name('post.AdminNotification')->middleware('auth:admin');
     Route::get('/AdminMember','AdminController@AdminMember')->name('post.AdminMember')->middleware('auth:admin');
     Route::get('/AdminProfil','AdminController@AdminProfil')->name('post.AdminProfil')->middleware('auth:admin');
-    Route::post('/AdminDetailTask','AdminController@DetailTask')->name('DetailTask')->middleware('auth:admin');
 
     // create
 	Route::post('/AdminCreate','AdminController@AdminStore')->name('post.AdminStore')->middleware('auth:admin');
 	Route::post('/project/task/store','AdminController@AdminTaskStore')->name('post.AdminTaskStore')->middleware('auth:admin');
 	Route::post('/project/{post}/comment','PostCommentController@AdminStore')->name('post.AdminComment')->middleware('auth:admin');
+	Route::post('/AdminAddStore','AdminController@AdminAddStore')->name('post.AdminAddStore')->middleware('auth:admin');
 
     // update
 	Route::post('/AdminUpdatePost','AdminController@AdminUpdatePost')->name('AdminUpdatePost')->middleware('auth:admin');
@@ -84,7 +85,6 @@ Route::group (['prefix' => 'member'], function(){
 	Route::get('/MemberNotification','MemberController@MemberNotification')->name('post.MemberNotification')->middleware('auth:member');
 	Route::get('/task/{task}','MemberController@MemberShowTask')->name('post.MemberShowTask')->middleware('auth:member');
 	Route::get('/MemberProfil','MemberController@MemberProfil')->name('post.MemberProfil')->middleware('auth:member');
-	Route::post('/MembernDetailTask','MemberController@DetailTask')->name('DetailTask')->middleware('auth:member');
 
 	// create
 	Route::post('/project/{post}/comment','PostCommentController@MemberStore')->name('post.MemberComment')->middleware('auth:member');
@@ -135,6 +135,7 @@ Route::group (['prefix' => 'kepala'], function(){
 	Route::get('/project','KepalaController@KepalaProject')->name('post.KepalaProject')->middleware('auth:kepala');
 	Route::get('/project/{post}','KepalaController@KepalaShow')->name('post.KepalaShow')->middleware('auth:kepala');
 	Route::get('/task','KepalaController@KepalaTask')->name('post.KepalaTask')->middleware('auth:kepala');
+	Route::get('/laporan','KepalaController@KepalaLaporan')->name('post.KepalaLaporan')->middleware('auth:kepala');
 	Route::get('/KepalaMember','KepalaController@KepalaMember')->name('post.KepalaMember')->middleware('auth:kepala');
 	Route::get('/KepalaProfil','KepalaController@KepalaProfil')->name('post.KepalaProfil')->middleware('auth:kepala');
 	Route::post('/KepalaDetailTask','KepalaController@DetailTask')->name('DetailTask')->middleware('auth:kepala');
@@ -144,9 +145,14 @@ Route::group (['prefix' => 'kepala'], function(){
 
 	// update
 	Route::post('/KepalaUpdate','KepalaController@KepalaUpdate')->name('KepalaUpdate')->middleware('auth:kepala');
+	Route::post('/KepalaUpdateAdmin','KepalaController@KepalaUpdateAdmin')->name('KepalaUpdateAdmin')->middleware('auth:kepala');
+	Route::post('/KepalaUpdateMember','KepalaController@KepalaUpdateMember')->name('KepalaUpdateMember')->middleware('auth:kepala');
+	Route::post('/KepalaUpdateSkpd','KepalaController@KepalaUpdateSkpd')->name('KepalaUpdateSkpd')->middleware('auth:kepala');
 
 	// delete
-
+	Route::delete('/KepalaDeleteAdmin','KepalaController@KepalaDestroyAdmin')->name('KepalaDeleteAdmin')->middleware('auth:kepala');
+	Route::delete('/KepalaDeleteMember','KepalaController@KepalaDestroyMember')->name('KepalaDeleteMember')->middleware('auth:kepala');
+	Route::delete('/KepalaDeleteSkpd','KepalaController@KepalaDestroySkpd')->name('KepalaDeleteSkpd')->middleware('auth:kepala');
 
 
 });

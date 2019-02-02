@@ -14,24 +14,42 @@
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">
 
-	            @foreach ($users as $user)
+	            @foreach ($members as $member)
               <div class="panel panel-default">
                   <div class="panel-heading">
-                      {{ $user->name }}
+                      {{ $member->name }}
                       <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$user->id}}" data-toggle="modal" data-target="#hapus_user">Hapus</button> &nbsp;
+                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$member->id}}" data-toggle="modal" data-target="#hapus_user">Hapus</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$user->id}}" data-name="{{$user->name}}" data-status="{{$user->status}}" data-email="{{$user->email}}" data-toggle="modal" data-target="#edit_user">Edit</button> &nbsp;
+                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$member->id}}" data-name="{{$member->name}}" data-status="{{$member->status}}" data-email="{{$member->email}}" data-toggle="modal" data-target="#edit_user">Edit</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-primary" data-id="{{$user->id}}" data-name="{{$user->name}}" data-status="{{$user->status}}" data-email="{{$user->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
+                        <button type="submit" class="btn btn-xs btn-primary" data-id="{{$member->id}}" data-name="{{$member->name}}" data-status="{{$member->status}}" data-email="{{$member->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
                       </div>
                   </div>
                   
               </div>
               
 	            @endforeach
+              @foreach ($skpds as $skpd)
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      {{ $skpd->name }}
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$skpd->id}}" data-toggle="modal" data-target="#hapus_user">Hapus</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$skpd->id}}" data-name="{{$skpd->name}}" data-status="{{$skpd->status}}" data-email="{{$skpd->email}}" data-toggle="modal" data-target="#edit_user">Edit</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-primary" data-id="{{$skpd->id}}" data-name="{{$skpd->name}}" data-status="{{$skpd->status}}" data-email="{{$skpd->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
+                      </div>
+                  </div>
+                  
+              </div>
+              
+              @endforeach
 		    </div>
 		</div>
 			</div>

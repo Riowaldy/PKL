@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\User;
+use App\Membertask;
+use App\Member;
 use App\Admin;
+use App\Skpd;
 use App\Task;
+use App\Laporan;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -44,7 +48,8 @@ class AdminController extends Controller
     public function AdminShow(Post $post)
     {
         $tasks = Task::latest()->paginate(3);
-        return view('post.AdminShow', compact('post','tasks'));
+        $members = Member::all();
+        return view('post.AdminShow', compact('post','tasks','members'));
     }
 
     public function AdminTask()
@@ -70,9 +75,10 @@ class AdminController extends Controller
     }
 
     public function AdminMember(){
-        $users = User::all();
+        $members = Member::all();
+        $skpds = Skpd::all();
 
-        return view('post.AdminMember', compact('users'));
+        return view('post.AdminMember', compact('skpds','members'));
     }
 
     public function AdminProfil(){
@@ -80,9 +86,10 @@ class AdminController extends Controller
         return view('post.AdminProfil', compact('ulog'));
     }
 
-    public function DetailTask(Request $request){
-      $select = \DB::table('tasks')->select('id')->where('id', $request->input('id'));
-      return back()->with('success');
+    public function AdminLaporan()
+    {
+        $laporans = Laporan::latest()->paginate(3);
+        return view('post.AdminLaporan', compact('laporans'));
     }
 
 // Controller create
@@ -113,15 +120,29 @@ class AdminController extends Controller
         ]);
         Task::create([
             'post_id' => request('post_id'),
-            'user_id' => '1',
             'judul_task' => request('judul_task'),
             'status' => 'belum selesai',
+            'start' => request('start'),
             'due_date' => request('due_date'),
             'slug' => str_slug(request('judul_task')),
             'isi_task' => request('isi_task')
         ]);
         return back()->with('success');
     }
+
+    public function AdminAddStore()
+    {
+        $this->validate(request(), [
+            'member_id' => 'required',
+            'task_id' => 'required'
+        ]);
+        Membertask::create([
+            'member_id' => request('member_id'),
+            'task_id' => request('task_id')
+        ]);
+        return back()->with('success');
+    }
+
 
 // Controller update
     public function AdminUpdatePost(Request $request){
@@ -136,6 +157,7 @@ class AdminController extends Controller
       $updatee->update(['judul_task' => $request->input('judul_task')]);
       $updatee->update(['status' => $request->input('status')]);
       $updatee->update(['isi_task' => $request->input('isi_task')]);
+      $updatee->update(['start' => $request->input('start')]);
       $updatee->update(['due_date' => $request->input('due_date')]);
       return back()->with('success');
     }

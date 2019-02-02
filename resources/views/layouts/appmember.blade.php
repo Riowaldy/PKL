@@ -108,13 +108,17 @@
           var button = $(event.relatedTarget)
           var id = button.data('id') 
           var judul_task = button.data('judul_task') 
-          var user = button.data('user')
-          var isi_task = button.data('isi_task')  
+          var status = button.data('status')
+          var isi_task = button.data('isi_task')
+          var start = button.data('start') 
+          var due_date = button.data('due_date')   
           var modal = $(this)
           modal.find('.modal-body #id').val(id);
           modal.find('.modal-body #judul_task').val(judul_task);
-          modal.find('.modal-body #user').val(user);
+          modal.find('.modal-body #status').val(status);
           modal.find('.modal-body #isi_task').val(isi_task);
+          modal.find('.modal-body #start').val(start);
+          modal.find('.modal-body #due_date').val(due_date);
         })
 
         $('#edit_status').on('show.bs.modal', function (event) {

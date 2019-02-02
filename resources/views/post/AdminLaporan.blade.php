@@ -1,4 +1,4 @@
-@extends('layouts.appkepala')
+@extends('layouts.appadmin')
 
 @section('content')
 	<section class="about" id="about">
@@ -23,21 +23,21 @@
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">
 
-	            @foreach ($tasks as $task)
+	            @foreach ($laporans as $laporan)
 	            	<div class="panel panel-default">
 		                <div class="panel-heading">
-		                	Nama Task : {{ $task->judul_task }}
+		                	Nama Task : {{ $laporan->subjek }}
                       <div class="pull-right">
-                        <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
+                        <input type="submit" class="btn btn-xs btn-primary" data-id="{{$laporan->id}}" data-skpd="{{$laporan->skpd->name}}" data-subjek="{{$laporan->subjek}}" data-lokasi="{{$laporan->lokasi}}" data-isi="{{$laporan->isi}}" data-toggle="modal" data-target="#detail_laporan" value="Detail"> &nbsp;
                       </div>
 		                	<div class="pull-right">
-		                		{{ $task->created_at->diffForHumans() }} &nbsp;
+		                		{{ $laporan->created_at->diffForHumans() }} &nbsp;
 		                	</div>
 		                </div>
 	            	</div>
 	            @endforeach
 
-	            {!! $tasks->render() !!}
+	            {!! $laporans->render() !!}
 		    </div>
 		</div>
 			</div>
@@ -46,12 +46,12 @@
         </div>
     </section>
 
-<!-- Modal -->
-  <div class="modal fade" id="detail_task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Modal -->
+  <div class="modal fade" id="detail_laporan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Task</h4>
+          <h4 class="modal-title" id="myModalLabel">Laporan</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -59,34 +59,30 @@
         <div class="modal-body">
                 
   <!--Form Dalam Modal -->
-          <form role="form" action="{{ route('DetailTask') }}" enctype="multipart/form-data" method="post">{{csrf_field()}}
+          <form role="form" action="" enctype="multipart/form-data" method="post">{{csrf_field()}}
             <div class="box-body">
               <div class="form-group">
                 <input type="hidden" name="id" id="id" class="form-control" value="" readonly>
               </div>
                   <div class="form-group">
-                      <label for="input_nama">Nama Task</label>
-                      <input type="text" name="judul_task" id="judul_task" class="form-control" value="" readonly>
+                      <label for="input_nama">Pengirim</label>
+                      <input type="text" name="skpd" id="skpd" class="form-control" value="" readonly>
                   </div>
                   <div class="form-group">
-                      <label for="input_nama">Status</label>
-                      <input type="text" name="status" id="status" class="form-control" value="" readonly>
+                      <label for="input_nama">Subjek</label>
+                      <input type="text" name="subjek" id="subjek" class="form-control" value="" readonly>
                   </div>
 
                   <div class="form-group">
-                      <label for="input_nama">Isi Task</label>
-                      <input type="text" name="isi_task" id="isi_task" class="form-control" value="" readonly>
+                      <label for="input_nama">Lokasi</label>
+                      <input type="text" name="lokasi" id="lokasi" class="form-control" value="" readonly>
                   </div>
 
                   <div class="form-group">
-                      <label for="input_nama">Start</label>
-                      <input type="date" name="start" id="start" class="form-control" value="" readonly>
+                      <label for="input_nama">Isi Laporan</label>
+                      <input type="text" name="isi" id="isi" class="form-control" value="" readonly>
                   </div>
 
-                  <div class="form-group">
-                      <label for="input_nama">Due Date</label>
-                      <input type="date" name="due_date" id="due_date" class="form-control" value="" readonly>
-                  </div>
               <div class="box-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>

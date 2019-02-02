@@ -36,9 +36,7 @@
 		                		{{ $post->created_at->diffForHumans() }} &nbsp;
 		                	</div>
 		                </div>
-		                <div class="panel-body">
-		                	<p>{{ str_limit($post->content, 100, '...') }}</p>
-		                </div>
+		                
 	            	</div>
 	            @endforeach
 

@@ -28,13 +28,13 @@
                           <button type="submit" class="btn btn-xs btn-danger" data-id="{{$task->id}}" data-toggle="modal" data-target="#hapus_task">Hapus</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                          <button type="submit" class="btn btn-xs btn-info" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#edit_task">Edit</button> &nbsp;
+                          <button type="submit" class="btn btn-xs btn-info" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#edit_task">Edit</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                          <button type="submit" class="btn btn-xs btn-warning" data-toggle="modal" data-target="">Add User</button> &nbsp;
+                          <button type="submit" class="btn btn-xs btn-warning" data-id="{{$task->id}}" data-toggle="modal" data-target="#add_user" >Add User</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                        <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-user="{{$task->user->name}}" data-isi_task="{{$task->isi_task}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
+                          <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
                       </div>
 	                </div>
 	            </div>
@@ -52,26 +52,20 @@
 					<div class="panel-heading">Tambahkan Komentar</div>
 					
 					@foreach ($post->comments()->get() as $comment)
-						<div class="panel-body">
-							@if($comment->user === null)
+						<div class="panel-body">	
 
-								@if($comment->member === null)
+							@if($comment->member === null)
 
 								<h4>{{ $comment->admin->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
 
 								<p>{{ $comment->message }}</p>
 
-								@else
+							@else
 
 								<h4>{{ $comment->member->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
 
 								<p>{{ $comment->message }}</p>
-
-								@endif
-							@else
-								<h4>{{ $comment->user->name }} - {{ $comment->created_at->diffForHumans() }}</h4>
-
-								<p>{{ $comment->message }}</p>
+							
 							@endif
 						</div>
 					@endforeach
@@ -86,6 +80,46 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal Add User-->
+	<div class="modal fade" id="add_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Add User</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					      
+	<!--Form Dalam Modal Add User -->
+					<form role="form" action="{{route('post.AdminAddStore')}}" enctype="multipart/form-data" method="post">{{csrf_field()}}
+						<div class="box-body">
+							<div class="form-group">
+								<input type="text" name="id" id="id" class="form-control" value="" readonly>
+							</div>
+							<div class="form-group">
+								<label for="">Pilih User</label>
+								<select name="member_id" id="" class="form-control">
+									@foreach ($members as $member)
+										<option value="{{ $member->id }}">{{ $member->name }}</option>
+									@endforeach
+								</select>
+							</div>
+									
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">Save</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Akhir Modal Add User -->
+
 	<!-- Modal Create Task-->
 	<div class="modal fade" id="create_task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -105,10 +139,6 @@
 								<input type="hidden" name="post_id" id="post_id" class="form-control" value="{{$post->id}}">
 							</div>
 							<div class="form-group">
-								<label for="input_nama">User</label>
-								<input type="text" name="user_id" id="user_id" class="form-control" placeholder="Pilih User">
-							</div>
-							<div class="form-group">
 								<label for="input_nama">Judul Task</label>
 								<input type="text" name="judul_task" id="judul_task" class="form-control" placeholder="Tulis Judul Task">
 							</div>
@@ -117,8 +147,12 @@
 								<textarea name="isi_task" id="isi_task" rows="5" class="form-control" placeholder="Tulis Isi Task"></textarea>
 							</div>	
 							<div class="form-group">
+								<label for="input_nama">Start</label>
+								<input type="date" name="start" id="start" class="form-control">
+							</div>
+							<div class="form-group">
 								<label for="input_nama">Due Date</label>
-								<input type="date" name="due_date" id="deadline" class="form-control">
+								<input type="date" name="due_date" id="due_date" class="form-control">
 							</div>		
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Save</button>
@@ -201,6 +235,11 @@
               </div>
 
               <div class="form-group">
+				  <label for="input_nama">Start</label>
+				  <input type="date" name="start" id="start" class="form-control" value="">
+			  </div>
+
+              <div class="form-group">
                   <label for="input_nama">Due Date</label>
                   <input type="date" name="due_date" id="due_date" class="form-control" value="">
               </div>
@@ -236,17 +275,28 @@
 								<input type="hidden" name="id" id="id" class="form-control" value="" readonly>
 							</div>
 							<div class="form-group">
-                <label for="input_nama">Nama Task</label>
+                				<label for="input_nama">Nama Task</label>
 								<input type="text" name="judul_task" id="judul_task" class="form-control" value="" readonly>
 							</div>
 							<div class="form-group">
-                <label for="input_nama">Dikerjakan Oleh</label>
-								<input type="text" name="user" id="user" class="form-control" value="" readonly>
-							</div>
-							<div class="form-group">
-                <label for="input_nama">Isi Task</label>
-								<input type="text" name="isi_task" id="isi_task" class="form-control" value="" readonly>
-							</div>
+					          	<label for="input_nama">Status</label>
+					          	<input type="text" name="status" id="status" class="form-control" value="" readonly>
+					      	</div>
+
+					      	<div class="form-group">
+					          	<label for="input_nama">Isi Task</label>
+					          	<input type="text" name="isi_task" id="isi_task" class="form-control" value="" readonly>
+					      	</div>
+
+					      	<div class="form-group">
+							  	<label for="input_nama">Start</label>
+							  	<input type="date" name="start" id="start" class="form-control" value="" readonly>
+						  	</div>
+
+					      	<div class="form-group">
+					          	<label for="input_nama">Due Date</label>
+					          	<input type="date" name="due_date" id="due_date" class="form-control" value="" readonly>
+					      	</div>
 							<div class="box-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							</div>
