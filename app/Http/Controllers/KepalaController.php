@@ -45,6 +45,12 @@ class KepalaController extends Controller
         return view('post.KepalaProject', compact('posts','categories'));
     }
 
+    public function search(Request $request){
+        $search = $request->get('search');
+        $posts = DB::table('posts')->where('title', 'like', '%'.$search.'%')->paginate(5);
+        return view ('post.KepalaProject', ['posts' => $posts]);
+    }
+
     public function KepalaShow(Post $post)
     {
         $tasks = Task::latest()->paginate(3);

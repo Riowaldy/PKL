@@ -31,7 +31,8 @@
                           <button type="submit" class="btn btn-xs btn-info" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#edit_task">Edit</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                          <button type="submit" class="btn btn-xs btn-warning" data-id="{{$task->id}}" data-toggle="modal" data-target="#add_user" >Add User</button> &nbsp;
+                      	  {{ csrf_field() }}
+                          <button type="button" class="btn btn-xs btn-warning" data-id="{{$task->id}}" data-toggle="modal" data-target="#add_user" >Add User</button> &nbsp;
                       </div>
                       <div class="pull-right">
                           <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
@@ -97,7 +98,7 @@
 					<form role="form" action="{{route('post.AdminAddStore')}}" enctype="multipart/form-data" method="post">{{csrf_field()}}
 						<div class="box-body">
 							<div class="form-group">
-								<input type="text" name="id" id="id" class="form-control" value="" readonly>
+								<input type="text" name="task_id" id="task_id" class="form-control" value="{{$task->id}}" readonly>
 							</div>
 							<div class="form-group">
 								<label for="">Pilih User</label>

@@ -5,7 +5,7 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-12 text-center">
-              <h2>All Task</h2>
+              <h2>Keluhan</h2>
               	<form class="navbar-form" role="search" method="post" action="">
               		{{ csrf_field() }}
               		<div class="input-group">

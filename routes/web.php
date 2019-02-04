@@ -21,6 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/logout', 'Auth\LoginController@logoutUser')->name('home.logout');
 
 Route::post('postMail', 'MailController@post')->name('postmail');
+Route::post('events','EventController@addEvent')->name('events.add');
+
+Route::get('/dynamic_pdf', 'DynamicPDFController@index');
+
+Route::get('/dynamic_pdf/pdf', 'DynamicPDFController@pdf');
 
 // ADMIN ROUTE
 Route::group (['prefix' => 'admin'], function(){
@@ -39,11 +44,12 @@ Route::group (['prefix' => 'admin'], function(){
     // view
     Route::get('/', 'AdminController@index')->name('admin.home');
     Route::get('/project','AdminController@AdminProject')->name('post.AdminProject')->middleware('auth:admin');
+
     Route::get('/project/{post}','AdminController@AdminShow')->name('post.AdminShow')->middleware('auth:admin');
+    Route::get('/calendar','AdminController@AdminCalendar')->name('post.AdminCalendar')->middleware('auth:admin');
     Route::get('/task','AdminController@AdminTask')->name('post.AdminTask')->middleware('auth:admin');
     Route::get('/laporan','AdminController@AdminLaporan')->name('post.AdminLaporan')->middleware('auth:admin');
     Route::get('/task/{task}','AdminController@AdminShowTask')->name('post.AdminShowTask')->middleware('auth:admin');
-    Route::get('/AdminCalendar','AdminController@AdminCalendar')->name('post.AdminCalendar')->middleware('auth:admin');
     Route::get('/AdminNotification','AdminController@AdminNotification')->name('post.AdminNotification')->middleware('auth:admin');
     Route::get('/AdminMember','AdminController@AdminMember')->name('post.AdminMember')->middleware('auth:admin');
     Route::get('/AdminProfil','AdminController@AdminProfil')->name('post.AdminProfil')->middleware('auth:admin');
@@ -133,6 +139,7 @@ Route::group (['prefix' => 'kepala'], function(){
 	// view
 	Route::get('/', 'KepalaController@index')->name('kepala.home');
 	Route::get('/project','KepalaController@KepalaProject')->name('post.KepalaProject')->middleware('auth:kepala');
+	Route::get('/search','KepalaController@search');
 	Route::get('/project/{post}','KepalaController@KepalaShow')->name('post.KepalaShow')->middleware('auth:kepala');
 	Route::get('/task','KepalaController@KepalaTask')->name('post.KepalaTask')->middleware('auth:kepala');
 	Route::get('/laporan','KepalaController@KepalaLaporan')->name('post.KepalaLaporan')->middleware('auth:kepala');

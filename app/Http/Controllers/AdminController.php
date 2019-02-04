@@ -12,6 +12,8 @@ use App\Admin;
 use App\Skpd;
 use App\Task;
 use App\Laporan;
+use DB;
+use Calendar;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -64,9 +66,19 @@ class AdminController extends Controller
     }
 
     public function AdminCalendar(){
-        $posts = Post::all();
-
-        return view('post.AdminCalendar', compact('posts'));
+        $events = Task::get();
+        $event_list = [];
+        foreach ($events as $key => $event) {
+          $event_list[] = Calendar::event(
+          $event->judul_task,
+          true,
+          new \DateTime($event->start),
+          new \DateTime($event->due_date.'+1 day')
+          );
+        }
+        $calendar_details = Calendar::addEvents($event_list);
+        
+        return view('post.AdminCalendar', compact('calendar_details'));
     }
 
     public function AdminNotification(Task $task){

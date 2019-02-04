@@ -18,6 +18,8 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous">
     </script>
+    
+ 
 </head>
 <body>
     <div id="app">
@@ -115,7 +117,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
+    
+    
     <script>
         $('#add_user').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
@@ -233,6 +236,8 @@
           var modal = $(this)
           modal.find('.modal-body #id').val(id);
         })
+
     </script>
+    
 </body>
 </html>

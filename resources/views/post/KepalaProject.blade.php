@@ -6,12 +6,11 @@
           <div class="row">
             <div class="col-sm-12 text-center">
               <h2>Project</h2>
-              	<form class="navbar-form" role="search" method="post" action="">
-	          		{{ csrf_field() }}
+              	<form class="navbar-form" method="get" action="/search">
 	          		<div class="input-group">
-	          			<input type="text" class="form-control" placeholder="Search" name="cari">
+	          			<input type="search" class="form-control" placeholder="Search" name="search">
 	          			<div class="input-group-btn">
-	          				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+	          				<button class="btn btn-default" type="submit">Search</button>
 	          			</div>
 	          		</div>
 	          	</form>
