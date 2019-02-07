@@ -14,6 +14,22 @@
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">
 
+              @foreach ($kepalas as $kepala)
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      {{ $kepala->name }}
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$kepala->id}}" data-toggle="modal" data-target="#hapus_user">Hapus</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$kepala->id}}" data-name="{{$kepala->name}}" data-status="{{$kepala->status}}" data-email="{{$kepala->email}}" data-toggle="modal" data-target="#edit_user">Edit</button> &nbsp;
+                      </div>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-xs btn-primary" data-id="{{$kepala->id}}" data-name="{{$kepala->name}}" data-status="{{$kepala->status}}" data-email="{{$kepala->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
+                      </div>
+                  </div>
+              </div>
+              @endforeach
 	            @foreach ($members as $member)
               <div class="panel panel-default">
                   <div class="panel-heading">
@@ -28,9 +44,7 @@
                         <button type="submit" class="btn btn-xs btn-primary" data-id="{{$member->id}}" data-name="{{$member->name}}" data-status="{{$member->status}}" data-email="{{$member->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
                       </div>
                   </div>
-                  
               </div>
-              
 	            @endforeach
               @foreach ($skpds as $skpd)
               <div class="panel panel-default">

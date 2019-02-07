@@ -8,6 +8,8 @@ use App\Category;
 use App\User;
 use App\Member;
 use App\Task;
+use DB;
+use Calendar;
 use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
@@ -44,9 +46,19 @@ class MemberController extends Controller
         return view('post.MemberShow', compact('post'));
     }
     public function MemberCalendar(){
-        $posts = Post::all();
-
-        return view('post.MemberCalendar', compact('posts'));
+        $events = Task::get();
+        $event_list = [];
+        foreach ($events as $key => $event) {
+          $event_list[] = Calendar::event(
+          $event->judul_task,
+          true,
+          new \DateTime($event->start),
+          new \DateTime($event->due_date.'+1 day')
+          );
+        }
+        $calendar_details = Calendar::addEvents($event_list);
+        
+        return view('post.MemberCalendar', compact('calendar_details'));
     }
     public function MemberNotification(){
         $tasks = Task::all();

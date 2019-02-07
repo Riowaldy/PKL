@@ -26,7 +26,7 @@
 	            @foreach ($laporans as $laporan)
 	            	<div class="panel panel-default">
 		                <div class="panel-heading">
-		                	Nama Task : {{ $laporan->subjek }}
+		                	Subjek Keluhan : {{ $laporan->subjek }}
                       <div class="pull-right">
                         <input type="submit" class="btn btn-xs btn-primary" data-id="{{$laporan->id}}" data-skpd="{{$laporan->skpd->name}}" data-subjek="{{$laporan->subjek}}" data-lokasi="{{$laporan->lokasi}}" data-isi="{{$laporan->isi}}" data-toggle="modal" data-target="#detail_laporan" value="Detail"> &nbsp;
                       </div>

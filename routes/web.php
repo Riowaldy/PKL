@@ -21,11 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/logout', 'Auth\LoginController@logoutUser')->name('home.logout');
 
 Route::post('postMail', 'MailController@post')->name('postmail');
-Route::post('events','EventController@addEvent')->name('events.add');
-
-Route::get('/dynamic_pdf', 'DynamicPDFController@index');
-
-Route::get('/dynamic_pdf/pdf', 'DynamicPDFController@pdf');
 
 // ADMIN ROUTE
 Route::group (['prefix' => 'admin'], function(){
@@ -91,6 +86,7 @@ Route::group (['prefix' => 'member'], function(){
 	Route::get('/MemberNotification','MemberController@MemberNotification')->name('post.MemberNotification')->middleware('auth:member');
 	Route::get('/task/{task}','MemberController@MemberShowTask')->name('post.MemberShowTask')->middleware('auth:member');
 	Route::get('/MemberProfil','MemberController@MemberProfil')->name('post.MemberProfil')->middleware('auth:member');
+	Route::get('/calendar','MemberController@MemberCalendar')->name('post.MemberCalendar')->middleware('auth:member');
 
 	// create
 	Route::post('/project/{post}/comment','PostCommentController@MemberStore')->name('post.MemberComment')->middleware('auth:member');
@@ -147,6 +143,13 @@ Route::group (['prefix' => 'kepala'], function(){
 	Route::get('/KepalaProfil','KepalaController@KepalaProfil')->name('post.KepalaProfil')->middleware('auth:kepala');
 	Route::post('/KepalaDetailTask','KepalaController@DetailTask')->name('DetailTask')->middleware('auth:kepala');
 
+	// Route PDF
+	Route::get('/dynamic_pdfProject','KepalaController@indexProjectPDF')->name('post.ProjectPDF')->middleware('auth:kepala');
+    Route::get('/dynamic_pdf/pdfProject','KepalaController@pdfProjectPDF')->name('post.ProjectPDF')->middleware('auth:kepala');
+    Route::get('/dynamic_pdfLaporan','KepalaController@indexLaporanPDF')->name('post.LaporanPDF')->middleware('auth:kepala');
+    Route::get('/dynamic_pdf/pdfLaporan','KepalaController@pdfLaporanPDF')->name('post.LaporanPDF')->middleware('auth:kepala');
+    // Akhir Route PDF
+
 	// create
 
 
@@ -162,37 +165,4 @@ Route::group (['prefix' => 'kepala'], function(){
 	Route::delete('/KepalaDeleteSkpd','KepalaController@KepalaDestroySkpd')->name('KepalaDeleteSkpd')->middleware('auth:kepala');
 
 
-});
-
-// USER ROUTE
-Route::middleware('auth')->group(function(){
-	Route::get('/post','PostController@index')->name('post.index')->middleware('auth');
-	Route::get('/calendar','PostController@calendar')->name('post.calendar')->middleware('auth');
-	Route::get('/notification','PostController@notification')->name('post.notification')->middleware('auth');
-	Route::get('/task','PostController@task')->name('post.task')->middleware('auth');
-	Route::get('/portfolio','PostController@portfolio')->name('post.portfolio')->middleware('auth');
-	Route::get('/member','PostController@member')->name('post.member')->middleware('auth');
-	Route::get('/profil','PostController@profil')->name('post.profil')->middleware('auth');
-
-	Route::post('/update','PostController@updatepro')->name('update')->middleware('auth');
-	Route::post('/status','PostController@update4')->name('status')->middleware('auth');
-	Route::post('/updatepost','PostController@update3')->name('updatepost')->middleware('auth');
-	Route::post('/updatetask','PostController@update1')->name('updatetask')->middleware('auth');
-	Route::post('/updateuser','PostController@update2')->name('updateuser')->middleware('auth');
-
-	Route::get('/post/create','PostController@create')->name('post.create')->middleware('auth');
-	Route::post('/post/create','PostController@store')->name('post.store')->middleware('auth');
-	Route::post('/post/task/store','PostController@taskstore')->name('post.taskstore')->middleware('auth');
-
-	Route::get('/searchcontent','PostController@searchcontent')->name('post.searchcontent')->middleware('auth');
-
-	Route::get('/post/{post}','PostController@show')->name('post.show')->middleware('auth');
-	Route::get('/showtask2','PostController@showtask2')->name('post.showtask2')->middleware('auth');
-	Route::get('/task/{task}','PostController@showtask')->name('post.showtask')->middleware('auth');
-
-	Route::delete('/deletepost','PostController@destroy')->name('deletepost')->middleware('auth');
-	Route::delete('/deletetask','PostController@destroytask')->name('deletetask')->middleware('auth');
-	Route::delete('/deleteuser','PostController@destroyuser')->name('deleteuser')->middleware('auth');
-
-	Route::post('/post/{post}/comment','PostCommentController@store')->name('post.comment.store')->middleware('auth');
 });

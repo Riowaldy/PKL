@@ -12,18 +12,13 @@
           <div class="row">
             <div class="container">
       <div class="row">
+          
           <div class="col-md-8 col-md-offset-2">
 
               @foreach ($admins as $admin)
               <div class="panel panel-default">
                   <div class="panel-heading">
                       {{ $admin->name }}
-                      <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$admin->id}}" data-toggle="modal" data-target="#hapus_admin">Hapus</button> &nbsp;
-                      </div>
-                      <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$admin->id}}" data-name="{{$admin->name}}" data-status="{{$admin->status}}" data-email="{{$admin->email}}" data-toggle="modal" data-target="#edit_admin">Edit</button> &nbsp;
-                      </div>
                       <div class="pull-right">
                         <button type="submit" class="btn btn-xs btn-primary" data-id="{{$admin->id}}" data-name="{{$admin->name}}" data-status="{{$admin->status}}" data-email="{{$admin->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
                       </div>
@@ -35,12 +30,6 @@
                   <div class="panel-heading">
                       {{ $member->name }}
                       <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$member->id}}" data-toggle="modal" data-target="#hapus_member">Hapus</button> &nbsp;
-                      </div>
-                      <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$member->id}}" data-name="{{$member->name}}" data-status="{{$member->status}}" data-email="{{$member->email}}" data-toggle="modal" data-target="#edit_member">Edit</button> &nbsp;
-                      </div>
-                      <div class="pull-right">
                         <button type="submit" class="btn btn-xs btn-primary" data-id="{{$member->id}}" data-name="{{$member->name}}" data-status="{{$member->status}}" data-email="{{$member->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
                       </div>
                   </div>
@@ -50,12 +39,6 @@
               <div class="panel panel-default">
                   <div class="panel-heading">
                       {{ $skpd->name }}
-                      <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-danger" data-id="{{$skpd->id}}" data-toggle="modal" data-target="#hapus_skpd">Hapus</button> &nbsp;
-                      </div>
-                      <div class="pull-right">
-                        <button type="submit" class="btn btn-xs btn-info" data-id="{{$skpd->id}}" data-name="{{$skpd->name}}" data-status="{{$skpd->status}}" data-email="{{$skpd->email}}" data-toggle="modal" data-target="#edit_skpd">Edit</button> &nbsp;
-                      </div>
                       <div class="pull-right">
                         <button type="submit" class="btn btn-xs btn-primary" data-id="{{$skpd->id}}" data-name="{{$skpd->name}}" data-status="{{$skpd->status}}" data-email="{{$skpd->email}}" data-toggle="modal" data-target="#detail_user">Detail</button> &nbsp;
                       </div>

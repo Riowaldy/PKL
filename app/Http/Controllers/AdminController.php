@@ -7,6 +7,7 @@ use App\Post;
 use App\Category;
 use App\User;
 use App\Membertask;
+use App\Kepala;
 use App\Member;
 use App\Admin;
 use App\Skpd;
@@ -87,10 +88,11 @@ class AdminController extends Controller
     }
 
     public function AdminMember(){
+        $kepalas = Kepala::all();
         $members = Member::all();
         $skpds = Skpd::all();
 
-        return view('post.AdminMember', compact('skpds','members'));
+        return view('post.AdminMember', compact('skpds','members','kepalas'));
     }
 
     public function AdminProfil(){
@@ -123,23 +125,36 @@ class AdminController extends Controller
         return redirect() -> route('post.AdminProject')->with('success');
     }
 
-    public function AdminTaskStore()
+    public function AdminTaskStore(Request $request)
     {
-        $this->validate(request(), [
+        $this->validate($request, array(
             'judul_task' => 'required',
             'isi_task' => 'required|min:10',
+            'start' => 'required',
             'due_date' => 'required'
-        ]);
-        Task::create([
-            'post_id' => request('post_id'),
-            'judul_task' => request('judul_task'),
-            'status' => 'belum selesai',
-            'start' => request('start'),
-            'due_date' => request('due_date'),
-            'slug' => str_slug(request('judul_task')),
-            'isi_task' => request('isi_task')
-        ]);
-        return back()->with('success');
+        ));
+        // Task::create([
+        //     'post_id' => request('post_id'),
+        //     'judul_task' => request('judul_task'),
+        //     'status' => 'belum selesai',
+        //     'start' => request('start'),
+        //     'due_date' => request('due_date'),
+        //     'slug' => str_slug(request('judul_task')),
+        //     'isi_task' => request('isi_task')
+        // ]);
+
+        $task = new Task;
+        $task->post_id = $request->post_id;
+        $task->judul_task = $request->judul_task;
+        $task->status = 'belum selesai';
+        $task->slug = str_slug($request->judul_task);
+        $task->isi_task = $request->isi_task;
+        $task->start = $request->start;
+        $task->due_date = $request->due_date;
+        
+        $task->save();
+        $task->member()->sync($request->members, false);
+        return back()->with('alert', 'Task Berhasil Ditambahkan');
     }
 
     public function AdminAddStore()

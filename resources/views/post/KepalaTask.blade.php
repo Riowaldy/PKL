@@ -6,15 +6,6 @@
           <div class="row">
             <div class="col-sm-12 text-center">
               <h2>All Task</h2>
-              	<form class="navbar-form" role="search" method="post" action="">
-              		{{ csrf_field() }}
-              		<div class="input-group">
-              			<input type="text" class="form-control" placeholder="Search" name="cari">
-              			<div class="input-group-btn">
-              				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-              			</div>
-              		</div>
-              	</form>
               <hr>
             </div> 
           </div>

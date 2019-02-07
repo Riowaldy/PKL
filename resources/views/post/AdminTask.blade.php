@@ -21,6 +21,7 @@
           <div class="row">
             <div class="container">
 	    <div class="row">
+          </div>
 	        <div class="col-md-8 col-md-offset-2">
 
 	            @foreach ($tasks as $task)

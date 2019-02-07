@@ -6,27 +6,29 @@
           <div class="row">
             <div class="col-sm-12 text-center">
               <h2>Keluhan</h2>
-              	<form class="navbar-form" role="search" method="post" action="">
-              		{{ csrf_field() }}
-              		<div class="input-group">
-              			<input type="text" class="form-control" placeholder="Search" name="cari">
-              			<div class="input-group-btn">
-              				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-              			</div>
-              		</div>
-              	</form>
               <hr>
             </div> 
           </div>
           <div class="row">
             <div class="container">
 	    <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="panel-heading">
+              <div class="pull-right">
+                <form action="{{ route('post.LaporanPDF') }}">
+                        {{csrf_field()}}
+                        <button type="submit" class="btn btn-xs btn-danger">Cetak PDF</button> &nbsp;
+                      </form>
+              </div>
+            </div>
+            <div class="panel-heading">
+            </div>
+          </div>
 	        <div class="col-md-8 col-md-offset-2">
-
 	            @foreach ($laporans as $laporan)
 	            	<div class="panel panel-default">
 		                <div class="panel-heading">
-		                	Nama Task : {{ $laporan->subjek }}
+		                	Subjek Keluhan : {{ $laporan->subjek }}
                       <div class="pull-right">
                         <input type="submit" class="btn btn-xs btn-primary" data-id="{{$laporan->id}}" data-skpd="{{$laporan->skpd->name}}" data-subjek="{{$laporan->subjek}}" data-lokasi="{{$laporan->lokasi}}" data-isi="{{$laporan->isi}}" data-toggle="modal" data-target="#detail_laporan" value="Detail"> &nbsp;
                       </div>

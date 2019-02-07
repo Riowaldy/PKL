@@ -35,7 +35,7 @@
                           <button type="button" class="btn btn-xs btn-warning" data-id="{{$task->id}}" data-toggle="modal" data-target="#add_user" >Add User</button> &nbsp;
                       </div>
                       <div class="pull-right">
-                          <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
+                          <input type="submit" class="btn btn-xs btn-primary" data-id="{{$task->id}}" data-judul_task="{{$task->judul_task}}" data-status="{{$task->status}}" data-isi_task="{{$task->isi_task}}" data-start="{{$task->start}}" data-due_date="{{$task->due_date}}" data-user="@foreach ($task->member as $all){{ $all->name }}, @endforeach" data-toggle="modal" data-target="#detail_task" value="Detail"> &nbsp;
                       </div>
 	                </div>
 	            </div>
@@ -154,6 +154,14 @@
 							<div class="form-group">
 								<label for="input_nama">Due Date</label>
 								<input type="date" name="due_date" id="due_date" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="input_user">Pilih User</label>
+								<select class="form-control select2-multi" name="members[]" multiple="multiple">
+									@foreach($members as $member)
+										<option value='{{ $member->id }}'>{{ $member->name }}</option>
+									@endforeach
+								</select>
 							</div>		
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Save</button>
@@ -298,6 +306,12 @@
 					          	<label for="input_nama">Due Date</label>
 					          	<input type="date" name="due_date" id="due_date" class="form-control" value="" readonly>
 					      	</div>
+
+							<div class="form-group">
+					          	<label for="input_nama">Dikerjakan Oleh</label>
+					          	<input type="text" name="user" id="user" class="form-control" value="" readonly>
+					      	</div>					      	
+
 							<div class="box-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							</div>

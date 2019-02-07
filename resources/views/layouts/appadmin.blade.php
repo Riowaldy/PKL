@@ -19,6 +19,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous">
     </script>
     
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/parsley.min.css') }}">
  
 </head>
 <body>
@@ -83,7 +85,19 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('post.AdminMember') }}">User</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>User<span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('post.AdminMember') }}">All User</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('kepala.register') }}">Tambah Kepala</a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -117,6 +131,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/parsley.min.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.select2-multi').select2();
+    </script>
     
     
     <script>
@@ -161,7 +181,8 @@
           var status = button.data('status')
           var isi_task = button.data('isi_task')
           var start = button.data('start') 
-          var due_date = button.data('due_date')   
+          var due_date = button.data('due_date')
+          var user = button.data('user')   
           var modal = $(this)
           modal.find('.modal-body #id').val(id);
           modal.find('.modal-body #judul_task').val(judul_task);
@@ -169,6 +190,7 @@
           modal.find('.modal-body #isi_task').val(isi_task);
           modal.find('.modal-body #start').val(start);
           modal.find('.modal-body #due_date').val(due_date);
+          modal.find('.modal-body #user').val(user);
         })
         $('#edit_profiladmin').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)

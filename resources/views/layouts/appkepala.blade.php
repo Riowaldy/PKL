@@ -50,8 +50,6 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('kepala.login') }}">Login</a></li>
-                            <li><a href="{{ route('kepala.register') }}">Register</a></li>
 
                         @else
                             <li><a href="{{ route('kepala.home') }}">Home</a></li>

@@ -12,8 +12,8 @@ class Task extends Model
     {
     	return $this->belongsTo(Post::class);
     }
-    public function comments()
+    public function member()
     {
-    	return $this->hasMany(comment::class);
+    	return $this->belongsToMany('App\Member','membertasks');
     }
 }

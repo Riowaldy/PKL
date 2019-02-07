@@ -6,20 +6,24 @@
           <div class="row">
             <div class="col-sm-12 text-center">
               <h2>Project</h2>
-              	<form class="navbar-form" method="get" action="/search">
-	          		<div class="input-group">
-	          			<input type="search" class="form-control" placeholder="Search" name="search">
-	          			<div class="input-group-btn">
-	          				<button class="btn btn-default" type="submit">Search</button>
-	          			</div>
-	          		</div>
-	          	</form>
               <hr>
             </div> 
           </div>
           <div class="row">
             <div class="container">
 	    <div class="row">
+	    	<div class="col-md-8 col-md-offset-2">
+		    	<div class="panel-heading">
+		    		<div class="pull-right">
+		    			<form action="{{ route('post.ProjectPDF') }}">
+                			{{csrf_field()}}
+                			<button type="submit" class="btn btn-xs btn-danger">Cetak PDF</button> &nbsp;
+                		</form>
+		    		</div>
+		    	</div>
+		    	<div class="panel-heading">
+		    	</div>
+		    </div>
 	        <div class="col-md-8 col-md-offset-2">
 	            @foreach ($posts as $post)
 	            	<div class="panel panel-default">

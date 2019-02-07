@@ -63,7 +63,7 @@ class RegisterController extends Controller
         //Attempt to log the user in
         if (Auth::guard('kepala')->attempt($credential, $request->member)) {
             // if login succesful, then redirect to their intended location
-            return redirect()->intended(route('kepala.home'));
+            return redirect()->intended(route('post.AdminMember'));
         }
     }
 }
